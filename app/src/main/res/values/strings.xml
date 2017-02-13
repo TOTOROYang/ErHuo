@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">二货</string>
+    <string name="str_login_account_tip">请输入学号</string>
+    <string name="str_login_password">请输入密码</string>
+    <string name="str_login">登陆</string>
+    <string name="str_login_verification">请输入验证码</string>
+    <string name="str_verification">验证码</string>
+</resources>

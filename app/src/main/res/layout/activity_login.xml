@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.htu.erhuo.ui.LoginActivity">
+
+    <ImageView
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:id="@+id/iv_forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/forget_password"
+        android:layout_alignParentEnd="true"/>
+    <ImageView
+        android:id="@+id/iv_input"
+        android:layout_width="281dp"
+        android:layout_height="380dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="67dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/login_input" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="193dp">
+
+        <EditText
+            android:id="@+id/et_account"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/str_login_account_tip"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/et_account"
+            android:layout_marginTop="0dp"
+            android:background="@null"
+            android:hint="@string/str_login_password"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="16sp"
+
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/iv_verification"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/et_password"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="11dp"
+            android:contentDescription="@string/str_verification"
+            android:scaleType="fitXY"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/et_verification"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/iv_verification"
+            android:layout_marginTop="11dp"
+            android:background="@null"
+            android:hint="@string/str_login_verification"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="16sp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="281dp"
+        android:layout_height="37dp"
+        android:layout_below="@id/iv_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_login_submit"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/btn_login_skip"
+        android:layout_width="281dp"
+        android:layout_height="37dp"
+        android:layout_below="@id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_login_skip_submit"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="visible" />
+
+    <WebView
+        android:id="@+id/web_jw"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:visibility="gone" />
+</RelativeLayout>
