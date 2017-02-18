@@ -32,10 +32,8 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity {
 
     private static final int WEB_PAGE_URL = 0;
-    private static final int WEB_PAGE_JS_GET_CHECK_IMAGE = 1;
-    private static final int WEB_PAGE_JS_LOGIN = 2;
-    private static final int WEB_PAGE_GET_CHECK_IMAGE = 3;
-    private static final int WEB_PAGE_LOGIN = 4;
+    private static final int WEB_PAGE_GET_CHECK_IMAGE = 1;
+    private static final int WEB_PAGE_LOGIN = 2;
 
     @BindView(R.id.et_account)
     EditText etAccount;
