@@ -3,10 +3,13 @@ package com.htu.erhuo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.htu.erhuo.entity.MovieEntity;
@@ -17,6 +20,7 @@ import com.htu.erhuo.ui.fragment.MyFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -30,6 +34,13 @@ public class MainActivity extends BaseActivity {
     ViewPager viewPage;
     @BindView(R.id.activity_main)
     CoordinatorLayout activityMain;
+    @BindView(R.id.fab_create)
+    FloatingActionButton fabCreate;
+    @BindView(R.id.iv_main)
+    ImageView ivMain;
+    @BindView(R.id.iv_me)
+    ImageView ivMe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,29 +51,39 @@ public class MainActivity extends BaseActivity {
         initUiAndData();
     }
 
-    /** *
-     初始化话界面和数据
+    /**
+     * 初始化话界面和数据
      */
     private void initUiAndData() {
         toolBar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolBar);
-        //初始化ViewPager的 Aapter 代码会在后面贴
         MyViewPagerAdapter adapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        //为Adapter添加Aapter和标题
-        adapter.addFragment(new MyFragment(),"最新");
-        adapter.addFragment(new MyFragment(),"价格");
-        adapter.addFragment(new MyFragment(),"喜欢");
-        //为ViewPager绑定Adapter
+        adapter.addFragment(new MyFragment(), "最新");
+        adapter.addFragment(new MyFragment(), "价格");
+        adapter.addFragment(new MyFragment(), "喜欢");
         viewPage.setAdapter(adapter);
-        //为TabLayout添加标签，注意这里我们传入了标签名称，但demo运行时显示的标签名称并不是我们添加的，那么为什么呢？卖个官子...
-        tabLayout.addTab(tabLayout.newTab().setText("one_"));
-        tabLayout.addTab(tabLayout.newTab().setText("two_"));
-        tabLayout.addTab(tabLayout.newTab().setText("three_"));
-        tabLayout.addTab(tabLayout.newTab().setText("three_"));
-        //给tabLayout设置ViewPage，如果设置关联了ViewPage，那么ViewPagAdapter中getPageTitle返回的就是Tab上标题(上面疑问的回答)
-        //为ViewPager 和TableLayout进行绑定，从而实现滑动标签切换Fragment的目的
         tabLayout.setupWithViewPager(viewPage);
+
     }
+
+    @OnClick({R.id.fab_create
+            , R.id.iv_main
+            , R.id.iv_me
+    })
+    void clickFabCreate(View v) {
+        switch (v.getId()) {
+            case R.id.fab_create:
+                Log.d("yzw", "create");
+                break;
+            case R.id.iv_main:
+                Log.d("yzw", "main");
+                break;
+            case R.id.iv_me:
+                Log.d("yzw", "me");
+                break;
+        }
+    }
+
 
     private void test() {
 

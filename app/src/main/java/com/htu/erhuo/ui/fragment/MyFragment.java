@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 public class MyFragment extends Fragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class MyFragment extends Fragment {
         initUIAndData();
         return view;
     }
+
     private void initUIAndData() {
         RecyclerAdapter adapter = new RecyclerAdapter(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
