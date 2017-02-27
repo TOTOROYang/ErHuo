@@ -25,7 +25,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
         this.mContext = context;
         //为测试给Recycler添加数据
         for (int i = 0; i < 100; i++) {
-            strs[i] = i + "";
+            strs[i] = "";
+            for (int j = 0; j <= i % 5; j++)
+                strs[i] += "峥";
         }
     }
 
@@ -50,6 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     static class MyHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_text_item)
         TextView textView;
+
         MyHolder(View itemView) {
             super(itemView);
             //ButterKnife也可以用于ViewHolder中

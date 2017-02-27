@@ -2,20 +2,25 @@ package com.htu.erhuo;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.htu.erhuo.entity.MovieEntity;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.BaseActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
+import com.htu.erhuo.ui.fragment.MeFragment;
 import com.htu.erhuo.ui.fragment.MyFragment;
 
 import butterknife.BindView;
@@ -30,8 +35,10 @@ public class MainActivity extends BaseActivity {
     Toolbar toolBar;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @BindView(R.id.view_page)
-    ViewPager viewPage;
+    @BindView(R.id.vp_goods)
+    ViewPager vpGoods;
+    @BindView(R.id.rl_me)
+    RelativeLayout rlMe;
     @BindView(R.id.activity_main)
     CoordinatorLayout activityMain;
     @BindView(R.id.fab_create)
@@ -40,6 +47,10 @@ public class MainActivity extends BaseActivity {
     ImageView ivMain;
     @BindView(R.id.iv_me)
     ImageView ivMe;
+    @BindView(R.id.app_bar_layout)
+    AppBarLayout appBarLayout;
+
+    MeFragment meFragment;
 
 
     @Override
@@ -61,8 +72,9 @@ public class MainActivity extends BaseActivity {
         adapter.addFragment(new MyFragment(), "最新");
         adapter.addFragment(new MyFragment(), "价格");
         adapter.addFragment(new MyFragment(), "喜欢");
-        viewPage.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPage);
+        meFragment = new MeFragment();
+        vpGoods.setAdapter(adapter);
+        tabLayout.setupWithViewPager(vpGoods);
 
     }
 
@@ -74,16 +86,35 @@ public class MainActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.fab_create:
                 Log.d("yzw", "create");
+                Toast.makeText(this, "发布", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_main:
                 Log.d("yzw", "main");
+                showGoods();
                 break;
             case R.id.iv_me:
                 Log.d("yzw", "me");
+                showMe();
                 break;
         }
     }
 
+    private void showGoods() {
+        toolBar.setVisibility(View.VISIBLE);
+        tabLayout.setVisibility(View.VISIBLE);
+        vpGoods.setVisibility(View.VISIBLE);
+        rlMe.setVisibility(View.GONE);
+        setSupportActionBar(toolBar);
+    }
+
+    private void showMe() {
+        toolBar.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.GONE);
+        vpGoods.setVisibility(View.GONE);
+        rlMe.setVisibility(View.VISIBLE);
+        if (!meFragment.isAdded())
+            getSupportFragmentManager().beginTransaction().add(R.id.rl_me, meFragment).commit();
+    }
 
     private void test() {
 

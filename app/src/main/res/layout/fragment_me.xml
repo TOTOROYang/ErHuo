@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_bg_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/gray">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/str_avatar"
+            android:src="@mipmap/ic_launcher" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_my_goods"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_my_goods"
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp" />
+
+    <Button
+        android:id="@+id/btn_my_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_normal"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_my_favorite"
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_about_erhuo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_about_erhuo"
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_exit_or_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_exit"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="16sp" />
+</LinearLayout>
