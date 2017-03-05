@@ -18,9 +18,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.htu.erhuo.MainActivity;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
+import com.htu.erhuo.entity.AuthToken;
+import com.htu.erhuo.entity.EntityResponse;
+import com.htu.erhuo.entity.UserInfo;
+import com.htu.erhuo.network.Network;
 import com.htu.erhuo.utiles.DeviceInfoUtil;
 import com.htu.erhuo.utiles.DialogUtil;
 import com.htu.erhuo.utiles.SoftKeyBoardListener;
@@ -28,6 +33,9 @@ import com.htu.erhuo.utiles.SoftKeyBoardListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class LoginActivity extends BaseActivity {
 
@@ -136,56 +144,58 @@ public class LoginActivity extends BaseActivity {
             }
         });
         webJw.addJavascriptInterface(new Object() {
-            @JavascriptInterface
-            public void imgData(final String data) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initVerifyImage(data);
-                    }
-                });
-            }
+                                         @JavascriptInterface
+                                         public void imgData(final String data) {
+                                             runOnUiThread(new Runnable() {
+                                                 @Override
+                                                 public void run() {
+                                                     initVerifyImage(data);
+                                                 }
+                                             });
+                                         }
 
-            @JavascriptInterface
-            public void name(final String name) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoadingDialog();
-                        String dex;
-                        if (name != null && name.length() > 0) {
-                            dex = "登陆成功\n" + name;
-                            DialogUtil.showTips(LoginActivity.this,
-                                    "登陆状态",
-                                    dex,
-                                    "确定",
-                                    new DialogInterface.OnDismissListener() {
-                                        @Override
-                                        public void onDismiss(DialogInterface dialog) {
-                                            startActivity(new Intent(mContext, MainActivity.class));
-                                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                                            finish();
-                                        }
-                                    });
-                        } else {
-                            dex = "登陆失败";
-                            DialogUtil.showTips(LoginActivity.this,
-                                    "登陆状态",
-                                    dex,
-                                    "确定",
-                                    new DialogInterface.OnDismissListener() {
-                                        @Override
-                                        public void onDismiss(DialogInterface dialog) {
-                                            etVerification.setText("");
-                                            initVerification();
-                                            showLoadingDialog();
-                                        }
-                                    });
-                        }
-                    }
-                });
-            }
-        }, "android");
+                                         @JavascriptInterface
+                                         public void name(final String name) {
+                                             runOnUiThread(new Runnable() {
+                                                 @Override
+                                                 public void run() {
+                                                     hideLoadingDialog();
+                                                     String dex;
+                                                     if (name != null && name.length() > 0) {
+                                                         requestServerToLogin(etAccount.getText().toString(), getRealName(name));
+//                            dex = "登陆成功\n" + name;
+//                            DialogUtil.showTips(LoginActivity.this,
+//                                    "登陆状态",
+//                                    dex,
+//                                    "确定",
+//                                    new DialogInterface.OnDismissListener() {
+//                                        @Override
+//                                        public void onDismiss(DialogInterface dialog) {
+//                                            startActivity(new Intent(mContext, MainActivity.class));
+//                                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//                                            finish();
+//                                        }
+//                                    });
+                                                     } else {
+                                                         dex = "登陆失败";
+                                                         DialogUtil.showTips(LoginActivity.this,
+                                                                 "登陆状态",
+                                                                 dex,
+                                                                 "确定",
+                                                                 new DialogInterface.OnDismissListener() {
+                                                                     @Override
+                                                                     public void onDismiss(DialogInterface dialog) {
+                                                                         etVerification.setText("");
+                                                                         initVerification();
+                                                                         showLoadingDialog();
+                                                                     }
+                                                                 });
+                                                     }
+                                                 }
+                                             });
+                                         }
+                                     }
+                , "android");
         webViewPage = WEB_PAGE_URL;
         webJw.loadUrl(EHApplication.HTU_JW_URL);
         Log.d("LoginActivity", "Load");
@@ -229,18 +239,19 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login_skip)
     public void clickBtnLoginSkip() {
-        DialogUtil.showTips(LoginActivity.this,
-                "登陆状态",
-                "游客登录成功",
-                "确定",
-                new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        startActivity(new Intent(mContext, MainActivity.class));
-                        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                        finish();
-                    }
-                });
+        requestServerToLogin("1308424017", "杨正威");
+//        DialogUtil.showTips(LoginActivity.this,
+//                "登陆状态",
+//                "游客登录成功",
+//                "确定",
+//                new DialogInterface.OnDismissListener() {
+//                    @Override
+//                    public void onDismiss(DialogInterface dialog) {
+//                        startActivity(new Intent(mContext, MainActivity.class));
+//                        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//                        finish();
+//                    }
+//                });
     }
 
 
@@ -249,5 +260,57 @@ public class LoginActivity extends BaseActivity {
         DialogUtil.showTips(LoginActivity.this,
                 "忘记密码",
                 "此处为教务系统登录的账号密码，如果遗忘请登录jw.htu.cn/jwweb找回\n");
+    }
+
+    private String getRealName(String name) {
+        return name.split("]")[1];
+    }
+
+    private void requestServerToLogin(String account, String name) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(account);
+        userInfo.setUserName(name);
+        userInfo.setImei("123");
+
+        Subscriber<EntityResponse> subscriber = new Subscriber<EntityResponse>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+//                dialog.cancel();
+                Toast.makeText(LoginActivity.this, "请求失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(EntityResponse entityResponse) {
+//                dialog.cancel();
+//                Log.d(TAG, "entityResponse == " + entityResponse);
+                if (entityResponse.getCode().equals("52")) {
+//                    ToastUtil.showShort(LoginActivity.this, "用户不存在");
+                    return;
+                } else if (entityResponse.getCode().equals("54")) {
+//                    ToastUtil.showShort(LoginActivity.this, "密码错误");
+                    return;
+                }
+                if (entityResponse.getCode().equals("0")) {
+//                    ConfigUtil.globalInstance(LoginActivity.this).putString(ConfigUtil.KEY_CURRENT_USER_NAME,
+//                            username);
+//                    ConfigUtil.globalInstance(LoginActivity.this).
+//                            putString(ConfigUtil.KEY_CURRENT_USER_INFO, GsonUtils.toJson(entityResponse.getData()));
+//                    startActivity();
+//                    AuthToken authToken = entityResponse.getMsg();
+                    Log.d("yzw",entityResponse.toString());
+                    startActivity(new Intent(mContext, MainActivity.class));
+                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    finish();
+                } else {
+//                    ToastUtil.showShort(LoginActivity.this, "登录遇到问题");
+                }
+            }
+        };
+        Network.getInstance().login(userInfo).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 }

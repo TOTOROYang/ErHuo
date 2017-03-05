@@ -1,10 +1,9 @@
 package com.htu.erhuo.network;
 
+import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.MovieEntity;
+import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.api.Api;
-import com.htu.erhuo.utiles.converter.ComplexGsonConverterFactory;
-
-import okhttp3.OkHttpClient;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -15,7 +14,9 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -28,7 +29,8 @@ import rx.schedulers.Schedulers;
  */
 
 public class Network {
-    public static final String BASE_URL = "http://api.douban.com/v2/movie/";
+    //    public static final String BASE_URL = "http://api.douban.com/v2/movie/";
+    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -41,8 +43,8 @@ public class Network {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClientBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(loggingInterceptor);
-//                .addInterceptor(new AuthInterceptor());
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(new AuthInterceptor());
 //        try {
 //            httpClientBuilder.sslSocketFactory(getSSLSocketFactory()).hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 //        } catch (Exception e) {
@@ -111,4 +113,14 @@ public class Network {
                 .subscribeOn(Schedulers.io());
     }
 
+    public Observable<EntityResponse> login(UserInfo userinfo) {
+        return api.login(userinfo)
+                .subscribeOn(Schedulers.io());
+
+    }
+    public Observable<EntityResponse<UserInfo>> getUserInfo(String account) {
+        return api.getUserInfo(account)
+                .subscribeOn(Schedulers.io());
+
+    }
 }

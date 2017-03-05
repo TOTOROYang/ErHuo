@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.htu.erhuo.R;
@@ -18,6 +19,7 @@ import butterknife.ButterKnife;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHolder> {
+
     private Context mContext;
     private String[] strs = new String[100];
 
@@ -41,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     //为ViewHolder中的布局绑定数据
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
-        holder.textView.setText(strs[position]);
+        holder.tvTextItem.setText(strs[position]);
     }
 
     @Override
@@ -50,8 +52,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     }
 
     static class MyHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.iv_goods_avatar_item)
+        ImageView ivGoodsAvatarItem;
         @BindView(R.id.tv_text_item)
-        TextView textView;
+        TextView tvTextItem;
+        @BindView(R.id.iv_goods_time_item)
+        TextView ivGoodsTimeItem;
+        @BindView(R.id.tv_goods_description_item)
+        TextView tvGoodsDescriptionItem;
+        @BindView(R.id.iv_goods_img_itme)
+        ImageView ivGoodsImgItme;
+        @BindView(R.id.iv_goods_img2_itme)
+        ImageView ivGoodsImg2Itme;
 
         MyHolder(View itemView) {
             super(itemView);

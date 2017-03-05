@@ -7,11 +7,18 @@
     <string name="str_verification">验证码</string>
     <string name="str_goods">商品</string>
     <string name="str_me">我</string>
-    <string name="str_avatar">个人头像</string>
+    <string name="str_avatar">头像</string>
     <string name="str_my_goods">我的商品</string>
     <string name="str_my_favorite">我的收藏</string>
     <string name="str_about_erhuo">关于二货</string>
     <string name="str_exit">退出账号</string>
-    <string name="str_sample_time">2017-2-27 23:20</string>
+    <string name="str_sample_time">2017–2–27 23:20</string>
     <string name="str_sample_description">商品描述。goods description</string>
+    <string name="str_personal_info">个人信息</string>
+    <string name="str_nick_name">昵称</string>
+    <string name="str_sign">个性签名</string>
+    <string name="str_sex">性别</string>
+    <string name="str_phone">手机号</string>
+    <string name="str_wechat">微信号</string>
+    <string name="str_qq">QQ号</string>
 </resources>

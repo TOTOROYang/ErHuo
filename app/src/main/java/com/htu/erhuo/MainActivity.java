@@ -1,5 +1,6 @@
 package com.htu.erhuo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -16,9 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.MovieEntity;
+import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.BaseActivity;
+import com.htu.erhuo.ui.LoginActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
 import com.htu.erhuo.ui.fragment.MeFragment;
 import com.htu.erhuo.ui.fragment.MyFragment;
@@ -87,6 +91,7 @@ public class MainActivity extends BaseActivity {
             case R.id.fab_create:
                 Log.d("yzw", "create");
                 Toast.makeText(this, "发布", Toast.LENGTH_SHORT).show();
+                getUserInfo("1308424017");
                 break;
             case R.id.iv_main:
                 Log.d("yzw", "main");
@@ -97,6 +102,31 @@ public class MainActivity extends BaseActivity {
                 showMe();
                 break;
         }
+    }
+
+    private void getUserInfo(String account) {
+        Subscriber<EntityResponse<UserInfo>> subscriber = new Subscriber<EntityResponse<UserInfo>>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity.this, "请求失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(EntityResponse<UserInfo> entityResponse) {
+                if (entityResponse.getCode().equals("0")) {
+                    UserInfo userInfo = entityResponse.getMsg();
+                    Log.d("yzw", userInfo.toString());
+                } else {
+                    Toast.makeText(MainActivity.this, "请求出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        Network.getInstance().getUserInfo(account).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 
     private void showGoods() {
