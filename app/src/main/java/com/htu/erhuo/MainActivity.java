@@ -1,5 +1,6 @@
 package com.htu.erhuo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -16,9 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.MovieEntity;
+import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.BaseActivity;
+import com.htu.erhuo.ui.LoginActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
 import com.htu.erhuo.ui.fragment.MeFragment;
 import com.htu.erhuo.ui.fragment.MyFragment;
@@ -26,6 +30,7 @@ import com.htu.erhuo.ui.fragment.MyFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -52,6 +57,7 @@ public class MainActivity extends BaseActivity {
 
     MeFragment meFragment;
 
+    UserInfo mUserInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,16 +93,74 @@ public class MainActivity extends BaseActivity {
             case R.id.fab_create:
                 Log.d("yzw", "create");
                 Toast.makeText(this, "发布", Toast.LENGTH_SHORT).show();
+//                getUserInfo("1308424017");
                 break;
             case R.id.iv_main:
                 Log.d("yzw", "main");
                 showGoods();
                 break;
             case R.id.iv_me:
-                Log.d("yzw", "me");
                 showMe();
+//                test();
                 break;
         }
+    }
+
+    private void test() {
+        if (mUserInfo != null) {
+            mUserInfo.setNickName("totoro");
+            setUserInfo("1308424017", mUserInfo);
+        }
+    }
+
+    private void getUserInfo(String account) {
+        Subscriber<EntityResponse<UserInfo>> subscriber = new Subscriber<EntityResponse<UserInfo>>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity.this, "请求失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(EntityResponse<UserInfo> entityResponse) {
+                if (entityResponse.getCode().equals("0")) {
+                    UserInfo userInfo = entityResponse.getMsg();
+                    mUserInfo = userInfo;
+                    Log.d("yzw", userInfo.toString());
+                } else {
+                    Toast.makeText(MainActivity.this, "请求出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        Network.getInstance().getUserInfo(account).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+    private void setUserInfo(String account, UserInfo userInfo) {
+        Subscriber<EntityResponse> subscriber = new Subscriber<EntityResponse>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(EntityResponse entityResponse) {
+                if (entityResponse.getCode().equals("0")) {
+                    Log.d("yzw", "success");
+                } else {
+                    Toast.makeText(MainActivity.this, "请求出错", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        Network.getInstance().setUserInfo(account, userInfo).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 
     private void showGoods() {
@@ -116,24 +180,4 @@ public class MainActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.rl_me, meFragment).commit();
     }
 
-    private void test() {
-
-        Subscriber<MovieEntity> subscriber = new Subscriber<MovieEntity>() {
-            @Override
-            public void onCompleted() {
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(MovieEntity movieEntity) {
-                Gson gson = new Gson();
-                Log.d("yzw", gson.toJson(movieEntity));
-            }
-        };
-        Network.getInstance().getTopMovie(1, 20).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
-    }
 }

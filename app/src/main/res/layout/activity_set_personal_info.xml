@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_set_personal_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_color"
+    android:orientation="vertical"
+    tools:context="com.htu.erhuo.ui.SetPersonalInfoActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:title="@string/str_personal_info" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_set_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:clickable="true"
+        android:background="@drawable/btn_normal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="11dp"
+            android:layout_marginStart="11dp"
+            android:gravity="center|start"
+            android:text="@string/str_avatar"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:contentDescription="@string/str_avatar"
+            android:src="@mipmap/ic_launcher" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_set_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:background="@drawable/btn_normal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="11dp"
+            android:layout_marginStart="11dp"
+            android:gravity="center|start"
+            android:text="@string/str_nick_name"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:gravity="center|end"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_set_sex"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:background="@drawable/btn_normal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="11dp"
+            android:layout_marginStart="11dp"
+            android:gravity="center|start"
+            android:text="@string/str_sex"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:gravity="center|end"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_set_sign"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:background="@drawable/btn_normal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="11dp"
+            android:layout_marginStart="11dp"
+            android:gravity="center|start"
+            android:text="@string/str_sign"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:gravity="center|end"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_set_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:background="@drawable/btn_normal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="11dp"
+            android:layout_marginStart="11dp"
+            android:gravity="center|start"
+            android:text="@string/str_phone"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:gravity="center|end"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_set_wechat"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:background="@drawable/btn_normal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="11dp"
+            android:layout_marginStart="11dp"
+            android:gravity="center|start"
+            android:text="@string/str_wechat"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:gravity="center|end"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_set_qq"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:background="@drawable/btn_normal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="11dp"
+            android:layout_marginStart="11dp"
+            android:gravity="center|start"
+            android:text="@string/str_qq"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:gravity="center|end"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/divider_color" />
+</LinearLayout>

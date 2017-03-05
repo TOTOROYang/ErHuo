@@ -6,4 +6,7 @@
     <color name="gray">#9FA0A7</color>
     <color name="black">#3D3C40</color>
     <color name="white">#FFFFFF</color>
+    <color name="window_color">#FAFAFA</color>
+    <color name="divider_color">#F0F0F0</color>
+
 </resources>

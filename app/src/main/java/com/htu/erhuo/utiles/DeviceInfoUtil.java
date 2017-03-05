@@ -330,7 +330,7 @@ public class DeviceInfoUtil {
         }
     }
 
-    private static String getWifiMacAddress(Context context) {
+    public static String getWifiMacAddress(Context context) {
         try {
             /*WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             String m_szWLANMAC="";

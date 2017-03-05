@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -21,13 +22,19 @@ import android.widget.Toast;
 import com.htu.erhuo.MainActivity;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
+import com.htu.erhuo.entity.EntityResponse;
+import com.htu.erhuo.entity.UserInfo;
+import com.htu.erhuo.network.Network;
 import com.htu.erhuo.utiles.DeviceInfoUtil;
 import com.htu.erhuo.utiles.DialogUtil;
+import com.htu.erhuo.utiles.PreferenceUtils;
 import com.htu.erhuo.utiles.SoftKeyBoardListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class LoginActivity extends BaseActivity {
 
@@ -80,7 +87,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        showLoadingDialog();
         initVerification();
         etAccount.postDelayed(new Runnable() {
             @Override
@@ -135,60 +141,49 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
-        webJw.addJavascriptInterface(new Object() {
-            @JavascriptInterface
-            public void imgData(final String data) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initVerifyImage(data);
+        webJw.addJavascriptInterface(
+                new Object() {
+                    @JavascriptInterface
+                    public void imgData(final String data) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                initVerifyImage(data);
+                            }
+                        });
                     }
-                });
-            }
 
-            @JavascriptInterface
-            public void name(final String name) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoadingDialog();
-                        String dex;
-                        if (name != null && name.length() > 0) {
-                            dex = "登陆成功\n" + name;
-                            DialogUtil.showTips(LoginActivity.this,
-                                    "登陆状态",
-                                    dex,
-                                    "确定",
-                                    new DialogInterface.OnDismissListener() {
-                                        @Override
-                                        public void onDismiss(DialogInterface dialog) {
-                                            startActivity(new Intent(mContext, MainActivity.class));
-                                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                                            finish();
-                                        }
-                                    });
-                        } else {
-                            dex = "登陆失败";
-                            DialogUtil.showTips(LoginActivity.this,
-                                    "登陆状态",
-                                    dex,
-                                    "确定",
-                                    new DialogInterface.OnDismissListener() {
-                                        @Override
-                                        public void onDismiss(DialogInterface dialog) {
-                                            etVerification.setText("");
-                                            initVerification();
-                                            showLoadingDialog();
-                                        }
-                                    });
-                        }
+                    @JavascriptInterface
+                    public void name(final String name) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String dex;
+                                if (name != null && name.length() > 0) {
+                                    requestServerToLogin(etAccount.getText().toString(), getRealName(name));
+                                } else {
+                                    hideLoadingDialog();
+                                    dex = "登陆失败";
+                                    DialogUtil.showTips(LoginActivity.this,
+                                            "登陆状态",
+                                            dex,
+                                            "确定",
+                                            new DialogInterface.OnDismissListener() {
+                                                @Override
+                                                public void onDismiss(DialogInterface dialog) {
+                                                    etVerification.setText("");
+                                                    initVerification();
+                                                    showLoadingDialog();
+                                                }
+                                            });
+                                }
+                            }
+                        });
                     }
-                });
-            }
-        }, "android");
+                }
+                , "android");
         webViewPage = WEB_PAGE_URL;
         webJw.loadUrl(EHApplication.HTU_JW_URL);
-        Log.d("LoginActivity", "Load");
     }
 
     private void initVerifyImage(String data) {
@@ -249,5 +244,46 @@ public class LoginActivity extends BaseActivity {
         DialogUtil.showTips(LoginActivity.this,
                 "忘记密码",
                 "此处为教务系统登录的账号密码，如果遗忘请登录jw.htu.cn/jwweb找回\n");
+    }
+
+    private String getRealName(String name) {
+        return name.split("]")[1];
+    }
+
+    private void requestServerToLogin(String account, String name) {
+        final UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(account);
+        userInfo.setUserName(name);
+        userInfo.setImei(PreferenceUtils.getInstance().getMacAddress());
+
+        Subscriber<EntityResponse> subscriber = new Subscriber<EntityResponse>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                hideLoadingDialog();
+                Toast.makeText(LoginActivity.this, "请求失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(EntityResponse entityResponse) {
+                hideLoadingDialog();
+                if (entityResponse.getCode().equals("0")) {
+                    if (!TextUtils.isEmpty(userInfo.getUserId())) {
+                        PreferenceUtils.getInstance().setUserId(userInfo.getUserId());
+                        PreferenceUtils.getInstance().setUserName(userInfo.getUserName());
+                    }
+                    startActivity(new Intent(mContext, MainActivity.class));
+                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "登录遇到问题", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        Network.getInstance().login(userInfo).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 }
