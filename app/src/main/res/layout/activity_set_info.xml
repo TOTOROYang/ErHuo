@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_set_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_color"
+    android:orientation="vertical"
+    tools:context="com.htu.erhuo.ui.SetInfoActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:title="@string/str_personal_info" />
+
+    <EditText
+        android:id="@+id/et_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="11dp"
+        android:background="@color/white"
+        android:inputType="text"
+        android:maxLength="20"
+        android:maxLines="1" />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="11dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/confirm"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+</LinearLayout>

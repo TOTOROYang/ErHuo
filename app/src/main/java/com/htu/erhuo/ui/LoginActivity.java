@@ -171,6 +171,7 @@ public class LoginActivity extends BaseActivity {
                                             new DialogInterface.OnDismissListener() {
                                                 @Override
                                                 public void onDismiss(DialogInterface dialog) {
+                                                    PreferenceUtils.getInstance().setIsLogin(false);
                                                     etVerification.setText("");
                                                     initVerification();
                                                     showLoadingDialog();
@@ -265,6 +266,8 @@ public class LoginActivity extends BaseActivity {
             public void onError(Throwable e) {
                 e.printStackTrace();
                 hideLoadingDialog();
+                PreferenceUtils.getInstance().setIsLogin(false);
+                initVerification();
                 Toast.makeText(LoginActivity.this, "请求失败，请检查网络连接", Toast.LENGTH_SHORT).show();
             }
 
@@ -275,6 +278,7 @@ public class LoginActivity extends BaseActivity {
                     if (!TextUtils.isEmpty(userInfo.getUserId())) {
                         PreferenceUtils.getInstance().setUserId(userInfo.getUserId());
                         PreferenceUtils.getInstance().setUserName(userInfo.getUserName());
+                        PreferenceUtils.getInstance().setIsLogin(true);
                     }
                     startActivity(new Intent(mContext, MainActivity.class));
                     overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);

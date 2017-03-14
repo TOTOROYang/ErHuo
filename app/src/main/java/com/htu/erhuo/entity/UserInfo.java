@@ -1,8 +1,9 @@
 package com.htu.erhuo.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
+public class UserInfo implements Serializable{
     private Long id;
 
     private String userId;

@@ -29,7 +29,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
         for (int i = 0; i < 100; i++) {
             strs[i] = "";
             for (int j = 0; j <= i % 5; j++)
-                strs[i] += "峥";
+                strs[i] += "open";
         }
     }
 

@@ -32,7 +32,8 @@
         <activity
             android:name=".ui.LoginActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity android:name=".ui.SetPersonalInfoActivity"></activity>
+        <activity android:name=".ui.SetPersonalInfoActivity" />
+        <activity android:name=".ui.SetInfoActivity"></activity>
     </application>
 
 </manifest>

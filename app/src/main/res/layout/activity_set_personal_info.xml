@@ -25,8 +25,8 @@
         android:id="@+id/rl_set_avatar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:clickable="true"
-        android:background="@drawable/btn_normal">
+        android:background="@drawable/btn_normal"
+        android:clickable="true">
 
         <TextView
             android:layout_width="100dp"
@@ -62,8 +62,8 @@
         android:id="@+id/rl_set_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
-        android:background="@drawable/btn_normal">
+        android:background="@drawable/btn_normal"
+        android:clickable="true">
 
         <TextView
             android:layout_width="100dp"
@@ -75,6 +75,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_nick_name"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -93,8 +94,8 @@
         android:id="@+id/rl_set_sex"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
-        android:background="@drawable/btn_normal">
+        android:background="@drawable/btn_normal"
+        android:clickable="true">
 
         <TextView
             android:layout_width="100dp"
@@ -106,6 +107,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_sex"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -124,8 +126,8 @@
         android:id="@+id/rl_set_sign"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
-        android:background="@drawable/btn_normal">
+        android:background="@drawable/btn_normal"
+        android:clickable="true">
 
         <TextView
             android:layout_width="100dp"
@@ -137,6 +139,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_sign"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -161,8 +164,8 @@
         android:id="@+id/rl_set_phone"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
-        android:background="@drawable/btn_normal">
+        android:background="@drawable/btn_normal"
+        android:clickable="true">
 
         <TextView
             android:layout_width="100dp"
@@ -174,6 +177,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -192,8 +196,8 @@
         android:id="@+id/rl_set_wechat"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
-        android:background="@drawable/btn_normal">
+        android:background="@drawable/btn_normal"
+        android:clickable="true">
 
         <TextView
             android:layout_width="100dp"
@@ -205,6 +209,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_wechat"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -223,8 +228,8 @@
         android:id="@+id/rl_set_qq"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
-        android:background="@drawable/btn_normal">
+        android:background="@drawable/btn_normal"
+        android:clickable="true">
 
         <TextView
             android:layout_width="100dp"
@@ -236,6 +241,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_qq"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"

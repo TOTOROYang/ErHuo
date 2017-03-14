@@ -17,18 +17,20 @@
             android:layout_centerInParent="true"
             android:contentDescription="@string/str_avatar"
             android:src="@mipmap/ic_launcher" />
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_avatar"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="11dp"
+            android:gravity="center"
             android:maxLines="2"
-            android:text="nick name"/>
+            android:text="nick name"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
     <Button
@@ -41,6 +43,7 @@
         android:paddingRight="11dp"
         android:text="@string/str_my_goods"
         android:textAlignment="textStart"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <View
@@ -56,6 +59,7 @@
         android:paddingRight="11dp"
         android:text="@string/str_my_favorite"
         android:textAlignment="textStart"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <Button
@@ -68,6 +72,7 @@
         android:paddingRight="11dp"
         android:text="@string/str_about_erhuo"
         android:textAlignment="textStart"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <Button

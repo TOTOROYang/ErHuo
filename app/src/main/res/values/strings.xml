@@ -21,4 +21,5 @@
     <string name="str_phone">手机号</string>
     <string name="str_wechat">微信号</string>
     <string name="str_qq">QQ号</string>
+    <string name="confirm">确定</string>
 </resources>

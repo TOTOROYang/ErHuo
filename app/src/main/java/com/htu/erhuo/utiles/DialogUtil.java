@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.text.Html;
 import android.view.View;
 
+import butterknife.OnClick;
+
 /**
  * Description
  * Created by yzw on 2017/1/31.
@@ -76,5 +78,16 @@ public class DialogUtil {
         dialog.setOnDismissListener(dismissListener);
         return dialog;
     }
+
+    public static Dialog showTips(Context context, String title, String des, String btn1, String btn2, DialogInterface.OnClickListener onClickListener1, DialogInterface.OnClickListener onClickListener2) {
+        AlertDialog.Builder builder = dialogBuilder(context, title, des);
+        builder.setCancelable(true);
+        builder.setPositiveButton(btn1, onClickListener1);
+        builder.setNegativeButton(btn2, onClickListener2);
+        Dialog dialog = builder.show();
+        dialog.setCanceledOnTouchOutside(true);
+        return dialog;
+    }
+
 }
 

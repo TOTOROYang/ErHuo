@@ -21,6 +21,8 @@ public class PreferenceUtils extends BasePreference {
     private String FIRST_LAUNCH = "first_launch";
     //mac地址
     private String MAC_ADDRESS = "mac_address";
+    //是否登录
+    private String IS_LOGIN = "is_login";
 
     private PreferenceUtils(Context context) {
         super(context);
@@ -28,7 +30,6 @@ public class PreferenceUtils extends BasePreference {
 
     /**
      * 这里我通过自定义的Application来获取Context对象，所以在获取preferenceUtils时不需要传入Context。
-     *
      */
     public synchronized static PreferenceUtils getInstance() {
         if (null == preferenceUtils) {
@@ -67,5 +68,13 @@ public class PreferenceUtils extends BasePreference {
 
     public String getMacAddress() {
         return getString(MAC_ADDRESS);
+    }
+
+    public void setIsLogin(boolean isLogin) {
+        setBoolean(IS_LOGIN, isLogin);
+    }
+
+    public boolean getIsLogin() {
+        return getBoolean(IS_LOGIN);
     }
 }

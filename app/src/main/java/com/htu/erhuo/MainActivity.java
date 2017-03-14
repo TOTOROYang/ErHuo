@@ -1,6 +1,5 @@
 package com.htu.erhuo;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -8,7 +7,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -16,21 +14,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.htu.erhuo.entity.EntityResponse;
-import com.htu.erhuo.entity.MovieEntity;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.BaseActivity;
-import com.htu.erhuo.ui.LoginActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
 import com.htu.erhuo.ui.fragment.MeFragment;
 import com.htu.erhuo.ui.fragment.MyFragment;
+import com.htu.erhuo.utiles.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -57,6 +52,9 @@ public class MainActivity extends BaseActivity {
 
     MeFragment meFragment;
 
+    boolean isLogin;
+    String account;
+    String name;
     UserInfo mUserInfo;
 
     @Override
@@ -64,7 +62,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        test();
         initUiAndData();
     }
 
@@ -74,13 +71,27 @@ public class MainActivity extends BaseActivity {
     private void initUiAndData() {
         toolBar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolBar);
+
+        if (PreferenceUtils.getInstance().getIsLogin()) {
+            isLogin = true;
+            account = PreferenceUtils.getInstance().getUserId();
+            name = PreferenceUtils.getInstance().getUserName();
+            getUserInfo(account);
+        }
+
         MyViewPagerAdapter adapter = new MyViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new MyFragment(), "最新");
         adapter.addFragment(new MyFragment(), "价格");
         adapter.addFragment(new MyFragment(), "喜欢");
         meFragment = new MeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isLogin", isLogin);
+        bundle.putString("account", account);
+        bundle.putString("name", name);
+        meFragment.setArguments(bundle);
         vpGoods.setAdapter(adapter);
         tabLayout.setupWithViewPager(vpGoods);
+
 
     }
 
@@ -93,7 +104,6 @@ public class MainActivity extends BaseActivity {
             case R.id.fab_create:
                 Log.d("yzw", "create");
                 Toast.makeText(this, "发布", Toast.LENGTH_SHORT).show();
-//                getUserInfo("1308424017");
                 break;
             case R.id.iv_main:
                 Log.d("yzw", "main");
@@ -180,4 +190,11 @@ public class MainActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.rl_me, meFragment).commit();
     }
 
+    public UserInfo getmUserInfo() {
+        return mUserInfo;
+    }
+
+    public void setmUserInfo(UserInfo mUserInfo) {
+        this.mUserInfo = mUserInfo;
+    }
 }

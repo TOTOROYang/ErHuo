@@ -1,6 +1,6 @@
 package com.htu.erhuo.entity;
 
-class UserContact {
+public class UserContact {
     private Integer id;
 
     private String userId;

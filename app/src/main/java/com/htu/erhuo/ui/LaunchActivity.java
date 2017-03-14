@@ -3,7 +3,6 @@ package com.htu.erhuo.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,7 +53,7 @@ public class LaunchActivity extends Activity {
         } else {
             macAddress = PreferenceUtils.getInstance().getMacAddress();
         }
-//        Toast.makeText(this, "mac:" + PreferenceUtils.getInstance().getMacAddress(), Toast.LENGTH_SHORT).show();
+        PreferenceUtils.getInstance().setIsLogin(false);
         if (TextUtils.isEmpty(PreferenceUtils.getInstance().getUserId())) {
             gotoLoginActivity();
         } else {
@@ -90,18 +89,23 @@ public class LaunchActivity extends Activity {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
+                PreferenceUtils.getInstance().setIsLogin(false);
                 Toast.makeText(LaunchActivity.this, "请求失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+                gotoLoginActivity();
             }
 
             @Override
             public void onNext(EntityResponse entityResponse) {
                 if (entityResponse.getCode().equals("0")) {
                     Log.d("yzw", entityResponse.toString());
+                    PreferenceUtils.getInstance().setIsLogin(true);
                     startActivity(new Intent(mContext, MainActivity.class));
                     overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                     finish();
                 } else {
+                    PreferenceUtils.getInstance().setIsLogin(false);
                     Toast.makeText(LaunchActivity.this, "自动登录失败", Toast.LENGTH_SHORT).show();
+                    gotoLoginActivity();
                 }
             }
         };
