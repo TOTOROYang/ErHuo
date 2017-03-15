@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
@@ -116,13 +117,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void test() {
-        if (mUserInfo != null) {
-            mUserInfo.setNickName("totoro");
-            setUserInfo("1308424017", mUserInfo);
-        }
-    }
-
     private void getUserInfo(String account) {
         Subscriber<EntityResponse<UserInfo>> subscriber = new Subscriber<EntityResponse<UserInfo>>() {
             @Override
@@ -140,6 +134,7 @@ public class MainActivity extends BaseActivity {
                 if (entityResponse.getCode().equals("0")) {
                     UserInfo userInfo = entityResponse.getMsg();
                     mUserInfo = userInfo;
+                    EHApplication.getInstance().setUserInfo(mUserInfo);
                     Log.d("yzw", userInfo.toString());
                 } else {
                     Toast.makeText(MainActivity.this, "请求出错", Toast.LENGTH_SHORT).show();
@@ -190,11 +185,4 @@ public class MainActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.rl_me, meFragment).commit();
     }
 
-    public UserInfo getmUserInfo() {
-        return mUserInfo;
-    }
-
-    public void setmUserInfo(UserInfo mUserInfo) {
-        this.mUserInfo = mUserInfo;
-    }
 }
