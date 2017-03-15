@@ -29,10 +29,11 @@ class AuthInterceptor implements Interceptor {
         Request request = requestBuilder.build();
 
         Response response = chain.proceed(request);
-        if (request.url().toString().contains("login"))
-//        if (token.equals(""))
+        if (request.url().toString().contains("login")) {
             token = response.header("token");
-        Log.d("yzw token", token);
+            if (token == null) token = "";
+        }
+        Log.d("yzw token", token + "");
         return response;
     }
 }

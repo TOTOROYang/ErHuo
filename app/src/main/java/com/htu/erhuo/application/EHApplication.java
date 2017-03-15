@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.htu.erhuo.entity.DaoMaster;
 import com.htu.erhuo.entity.DaoSession;
+import com.htu.erhuo.entity.UserInfo;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -20,6 +21,7 @@ public class EHApplication extends Application {
     public static final boolean ENCRYPTED = false;
     private DaoSession daoSession;
     private static EHApplication instance;
+    private UserInfo userInfo;
 
     public EHApplication() {
         instance = this;
@@ -40,7 +42,16 @@ public class EHApplication extends Application {
     public static EHApplication getContext() {
         return instance;
     }
+
     public static EHApplication getInstance() {
         return instance;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 }

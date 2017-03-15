@@ -3,20 +3,19 @@ package com.htu.erhuo.ui.fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.htu.erhuo.MainActivity;
 import com.htu.erhuo.R;
+import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.ui.LoginActivity;
 import com.htu.erhuo.ui.SetPersonalInfoActivity;
@@ -63,7 +62,7 @@ public class MeFragment extends Fragment {
         isLogin = getArguments().getBoolean("isLogin");
         account = getArguments().getString("account");
         name = getArguments().getString("name");
-        mUserInfo = ((MainActivity) getActivity()).getmUserInfo();
+        mUserInfo = EHApplication.getInstance().getUserInfo();
         return view;
     }
 
@@ -90,12 +89,15 @@ public class MeFragment extends Fragment {
 
     @OnClick(R.id.iv_avatar)
     void clickIvAvatar() {
-        Intent intent = new Intent(getContext(), SetPersonalInfoActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userInfo", mUserInfo);
-        bundle.putString("account", account);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        if (isLogin) {
+            Intent intent = new Intent(getContext(), SetPersonalInfoActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("account", account);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(), "请先登录,才能进入个人设置", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.btn_exit_or_login)
