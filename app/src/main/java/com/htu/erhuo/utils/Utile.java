@@ -1,4 +1,4 @@
-package com.htu.erhuo.utiles;
+package com.htu.erhuo.utils;
 
 import android.app.Activity;
 import android.content.CursorLoader;

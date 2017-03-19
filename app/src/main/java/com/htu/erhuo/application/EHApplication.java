@@ -14,12 +14,12 @@ import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.ErhuoOssToken;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
-import com.htu.erhuo.utiles.PreferenceUtils;
+import com.htu.erhuo.utils.FileUtils;
+import com.htu.erhuo.utils.PreferenceUtils;
 
 import org.greenrobot.greendao.database.Database;
 
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
@@ -50,6 +50,7 @@ public class EHApplication extends Application {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? "erhuo-db-encrypted" : "erhuo-db");
         Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
+        FileUtils.createInstance(this);
 
     }
 

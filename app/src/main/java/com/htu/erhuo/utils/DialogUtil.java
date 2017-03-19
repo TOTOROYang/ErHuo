@@ -1,4 +1,4 @@
-package com.htu.erhuo.utiles;
+package com.htu.erhuo.utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.text.Html;
 import android.view.View;
-
-import butterknife.OnClick;
 
 /**
  * Description

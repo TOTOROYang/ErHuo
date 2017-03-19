@@ -20,8 +20,9 @@ import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.ui.LoginActivity;
 import com.htu.erhuo.ui.SetPersonalInfoActivity;
-import com.htu.erhuo.utiles.DialogUtil;
-import com.htu.erhuo.utiles.PreferenceUtils;
+import com.htu.erhuo.utils.DialogUtil;
+import com.htu.erhuo.utils.ImageUtils;
+import com.htu.erhuo.utils.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,15 +83,18 @@ public class MeFragment extends Fragment {
         } else {
             tvName.setText("游客");
         }
-        Glide.with(getActivity())
-                .load(R.mipmap.ic_launcher)
-                .crossFade(1000)
-                .bitmapTransform(new BlurTransformation(getActivity(), Glide.get(getActivity()).getBitmapPool(), 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
-                .into(ivBgAvatar);
+
         if (isLogin) {
             btnExitOrLogin.setText("退出账号");
         } else {
             btnExitOrLogin.setText("登录");
+        }
+
+        if (mUserInfo != null && !TextUtils.isEmpty(mUserInfo.getPortrait())) {
+            ImageUtils.showNormalAndGaussImage(getActivity(), ivAvatar, ivBgAvatar, mUserInfo.getPortrait());
+
+        } else {
+            ImageUtils.showGaussImageRes(getActivity(), ivBgAvatar, R.mipmap.ic_launcher);
         }
     }
 
@@ -98,7 +102,7 @@ public class MeFragment extends Fragment {
         super();
     }
 
-    @OnClick(R.id.iv_avatar)
+    @OnClick({R.id.iv_avatar, R.id.iv_bg_avatar})
     void clickIvAvatar() {
         if (isLogin) {
             Intent intent = new Intent(getContext(), SetPersonalInfoActivity.class);

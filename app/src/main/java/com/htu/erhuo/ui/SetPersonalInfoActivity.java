@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.htu.erhuo.R;
@@ -26,8 +29,9 @@ import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.UserContact;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
-import com.htu.erhuo.utiles.PreferenceUtils;
-import com.htu.erhuo.utiles.Utile;
+import com.htu.erhuo.utils.FileUtils;
+import com.htu.erhuo.utils.ImageUtils;
+import com.htu.erhuo.utils.Utile;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +55,8 @@ public class SetPersonalInfoActivity extends BaseActivity {
     LinearLayout activitySetPersonalInfo;
     @BindView(R.id.rl_set_avatar)
     RelativeLayout rlSetAvatar;
+    @BindView(R.id.iv_avatar)
+    ImageView ivAvatar;
     @BindView(R.id.tv_nick_name)
     TextView tvNickName;
     @BindView(R.id.rl_set_name)
@@ -80,6 +86,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
     UserInfo mUserInfo;
     UserInfo localUserInfo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +102,6 @@ public class SetPersonalInfoActivity extends BaseActivity {
                 finish();
             }
         });
-
         account = getIntent().getStringExtra("account");
         mUserInfo = EHApplication.getInstance().getUserInfo();
         localUserInfo = mUserInfo;
@@ -105,6 +111,9 @@ public class SetPersonalInfoActivity extends BaseActivity {
     private void init() {
         if (!TextUtils.isEmpty(mUserInfo.getNickName())) {
             tvNickName.setText(mUserInfo.getNickName());
+        }
+        if (!TextUtils.isEmpty(mUserInfo.getPortrait())) {
+            ImageUtils.showImage(this, ivAvatar, mUserInfo.getPortrait());
         }
         if (mUserInfo.getSex() != null) {
             tvSex.setText(mUserInfo.getSex() == 0 ? "女" : "男");
@@ -171,7 +180,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
     }
 
     private void selectAvatar() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_SET_AVATAR);
     }
 
@@ -246,23 +255,24 @@ public class SetPersonalInfoActivity extends BaseActivity {
 
     private void uploadAvatar(String avatarPath) {
         showLoadingDialog(getString(R.string.uploading));
-        // TODO: 2017/3/19
-        String fileName = PreferenceUtils.getInstance().getUserId() + "_" +
-                System.currentTimeMillis() +
-                avatarPath.substring(avatarPath.lastIndexOf("."));
-        PutObjectRequest put = new PutObjectRequest("htuerhuo-img", fileName, avatarPath);
+        final String fileName = FileUtils.getUploadAvatarNameFromPath(avatarPath);
+        PutObjectRequest put = new PutObjectRequest(FileUtils.ERHUO_BUCKET, fileName, avatarPath);
+        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+                long percent = currentSize * 100 / totalSize;
+                showLoadingText(getString(R.string.uploading) + " " + percent + "%");
+            }
+        });
         EHApplication.getInstance().getOss().asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 Log.d("PutObject", "UploadSuccess");
                 Log.d("ETag", result.getETag());
                 Log.d("RequestId", result.getRequestId());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoadingDialog();
-                    }
-                });
+                localUserInfo.setPortrait(fileName);
+                setUserInfo(account, localUserInfo);
             }
 
             @Override
@@ -279,6 +289,13 @@ public class SetPersonalInfoActivity extends BaseActivity {
                     Log.e("HostId", serviceException.getHostId());
                     Log.e("RawMessage", serviceException.getRawMessage());
                 }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoadingDialog();
+                        Toast.makeText(mContext, "上传失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -300,6 +317,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
                 if (entityResponse.getCode().equals("0")) {
                     Log.d("yzw", "success");
                     mUserInfo = localUserInfo;
+                    hideLoadingDialog();
                     init();
                 } else {
                     Toast.makeText(SetPersonalInfoActivity.this, "设置失败", Toast.LENGTH_SHORT).show();

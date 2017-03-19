@@ -38,7 +38,7 @@ public class LoadingDialog extends Dialog {
                 tvLoading.setVisibility(View.VISIBLE);
                 tvLoading.setText(content);
             } else {
-                tvLoading.setVisibility(View.GONE);
+                tvLoading.setVisibility(View.INVISIBLE);
             }
     }
 

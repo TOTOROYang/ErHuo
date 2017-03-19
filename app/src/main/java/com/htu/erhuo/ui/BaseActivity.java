@@ -68,6 +68,19 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 显示提示框后改变提示内容
+     */
+    public void showLoadingText(final String content){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.setCancelable(false);
+                loadingDialog.setLoadingContent(content);
+            }
+        });
+    }
+
+    /**
      * 关闭加载框
      */
     public void hideLoadingDialog() {

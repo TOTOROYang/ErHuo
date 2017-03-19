@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
-import com.htu.erhuo.utiles.DeviceInfoUtil;
+import com.htu.erhuo.utils.DeviceInfoUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

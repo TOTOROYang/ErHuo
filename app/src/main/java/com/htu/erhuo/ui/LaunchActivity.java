@@ -16,8 +16,8 @@ import com.htu.erhuo.R;
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
-import com.htu.erhuo.utiles.DeviceInfoUtil;
-import com.htu.erhuo.utiles.PreferenceUtils;
+import com.htu.erhuo.utils.DeviceInfoUtil;
+import com.htu.erhuo.utils.PreferenceUtils;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;

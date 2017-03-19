@@ -1,6 +1,5 @@
 package com.htu.erhuo;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -22,7 +21,7 @@ import com.htu.erhuo.ui.BaseActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
 import com.htu.erhuo.ui.fragment.MeFragment;
 import com.htu.erhuo.ui.fragment.MyFragment;
-import com.htu.erhuo.utiles.PreferenceUtils;
+import com.htu.erhuo.utils.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -114,7 +113,6 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.iv_me:
                 showMe();
-//                test();
                 break;
         }
     }

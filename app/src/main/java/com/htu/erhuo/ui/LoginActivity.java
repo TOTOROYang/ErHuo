@@ -25,10 +25,10 @@ import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
-import com.htu.erhuo.utiles.DeviceInfoUtil;
-import com.htu.erhuo.utiles.DialogUtil;
-import com.htu.erhuo.utiles.PreferenceUtils;
-import com.htu.erhuo.utiles.SoftKeyBoardListener;
+import com.htu.erhuo.utils.DeviceInfoUtil;
+import com.htu.erhuo.utils.DialogUtil;
+import com.htu.erhuo.utils.PreferenceUtils;
+import com.htu.erhuo.utils.SoftKeyBoardListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
