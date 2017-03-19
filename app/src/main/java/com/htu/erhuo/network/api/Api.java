@@ -1,6 +1,7 @@
 package com.htu.erhuo.network.api;
 
 import com.htu.erhuo.entity.EntityResponse;
+import com.htu.erhuo.entity.ErhuoOssToken;
 import com.htu.erhuo.entity.MovieEntity;
 import com.htu.erhuo.entity.UserInfo;
 
@@ -32,5 +33,9 @@ public interface Api {
     @POST("user/{account}")
     @Headers("token:need")
     Observable<EntityResponse> setUserInfo(@Path("account") String account, @Body UserInfo userInfo);
+
+    @GET("sts/img/{key}")
+    @Headers("token:need")
+    Observable<EntityResponse<ErhuoOssToken>> getOssToken(@Path("key") String key);
 
 }

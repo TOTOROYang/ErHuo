@@ -3,6 +3,7 @@ package com.htu.erhuo.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -14,13 +15,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.htu.erhuo.MainActivity;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.UserContact;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
+import com.htu.erhuo.utiles.PreferenceUtils;
+import com.htu.erhuo.utiles.Utile;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -130,6 +137,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
         Intent intent = new Intent(this, SetInfoActivity.class);
         switch (v.getId()) {
             case R.id.rl_set_avatar:
+                selectAvatar();
                 break;
             case R.id.rl_set_name:
                 intent.putExtra("title", "设置昵称");
@@ -162,6 +170,11 @@ public class SetPersonalInfoActivity extends BaseActivity {
         }
     }
 
+    private void selectAvatar() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_SET_AVATAR);
+    }
+
     private void showSetSexDialog() {
         new AlertDialog.Builder(this).setTitle("设置性别").
                 setSingleChoiceItems(new String[]{"女", "男"}, 0, new DialogInterface.OnClickListener() {
@@ -178,6 +191,16 @@ public class SetPersonalInfoActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SET_AVATAR) {
+            if (data.getData() != null) {
+                Uri selectedImage = data.getData();
+                String avatarPath = selectedImage.toString();
+                if (selectedImage.toString().contains("content")) {
+                    avatarPath = Utile.getRealPathFromURI(this, selectedImage);
+                }
+                uploadAvatar(avatarPath);
+            }
+        }
         if (requestCode == REQUEST_SET_NAME) {
             if (resultCode == 0) {
                 String name = data.getStringExtra("result");
@@ -219,6 +242,45 @@ public class SetPersonalInfoActivity extends BaseActivity {
                 setUserInfo(account, localUserInfo);
             }
         }
+    }
+
+    private void uploadAvatar(String avatarPath) {
+        showLoadingDialog(getString(R.string.uploading));
+        // TODO: 2017/3/19
+        String fileName = PreferenceUtils.getInstance().getUserId() + "_" +
+                System.currentTimeMillis() +
+                avatarPath.substring(avatarPath.lastIndexOf("."));
+        PutObjectRequest put = new PutObjectRequest("htuerhuo-img", fileName, avatarPath);
+        EHApplication.getInstance().getOss().asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                Log.d("PutObject", "UploadSuccess");
+                Log.d("ETag", result.getETag());
+                Log.d("RequestId", result.getRequestId());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoadingDialog();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                }
+                if (serviceException != null) {
+                    // 服务异常
+                    Log.e("ErrorCode", serviceException.getErrorCode());
+                    Log.e("RequestId", serviceException.getRequestId());
+                    Log.e("HostId", serviceException.getHostId());
+                    Log.e("RawMessage", serviceException.getRawMessage());
+                }
+            }
+        });
     }
 
     private void setUserInfo(String account, UserInfo userInfo) {

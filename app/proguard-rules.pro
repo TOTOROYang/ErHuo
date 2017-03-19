@@ -97,3 +97,8 @@ public static java.lang.String TABLENAME;
 -keepattributes EnclosingMethod
 -keep class org.xz_sale.entity.**{*;}
 #这是你定义的实体类
+
+#阿里oss
+-keep class com.alibaba.sdk.android.oss.** { *; }
+-dontwarn okio.**
+-dontwarn org.apache.commons.codec.binary.**

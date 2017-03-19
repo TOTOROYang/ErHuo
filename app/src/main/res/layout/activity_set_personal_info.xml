@@ -35,6 +35,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center|start"
             android:text="@string/str_avatar"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <ImageView
@@ -72,6 +73,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center|start"
             android:text="@string/str_nick_name"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -104,6 +106,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center|start"
             android:text="@string/str_sex"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -136,6 +139,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center|start"
             android:text="@string/str_sign"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -174,6 +178,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center|start"
             android:text="@string/str_phone"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -206,6 +211,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center|start"
             android:text="@string/str_wechat"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -238,6 +244,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center|start"
             android:text="@string/str_qq"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView

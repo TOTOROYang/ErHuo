@@ -1,6 +1,7 @@
 package com.htu.erhuo.network;
 
 import com.htu.erhuo.entity.EntityResponse;
+import com.htu.erhuo.entity.ErhuoOssToken;
 import com.htu.erhuo.entity.MovieEntity;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.api.Api;
@@ -28,8 +29,8 @@ import rx.schedulers.Schedulers;
  */
 
 public class Network {
-//    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
-    private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
+    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
+    //    private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -115,18 +116,20 @@ public class Network {
     public Observable<EntityResponse> login(UserInfo userinfo) {
         return api.login(userinfo)
                 .subscribeOn(Schedulers.io());
-
     }
 
     public Observable<EntityResponse<UserInfo>> getUserInfo(String account) {
         return api.getUserInfo(account)
                 .subscribeOn(Schedulers.io());
-
     }
 
     public Observable<EntityResponse> setUserInfo(String account, UserInfo userInfo) {
         return api.setUserInfo(account, userInfo)
                 .subscribeOn(Schedulers.io());
+    }
 
+    public Observable<EntityResponse<ErhuoOssToken>> getOssToken(String key) {
+        return api.getOssToken(key)
+                .subscribeOn(Schedulers.immediate());
     }
 }

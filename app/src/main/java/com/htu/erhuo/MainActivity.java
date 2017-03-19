@@ -74,6 +74,7 @@ public class MainActivity extends BaseActivity {
         toolBar.setLogo(R.drawable.toolbar_logo);
         setSupportActionBar(toolBar);
 
+        EHApplication.getInstance().initOss();
         if (PreferenceUtils.getInstance().getIsLogin()) {
             isLogin = true;
             account = PreferenceUtils.getInstance().getUserId();
@@ -143,30 +144,6 @@ public class MainActivity extends BaseActivity {
             }
         };
         Network.getInstance().getUserInfo(account).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
-    }
-
-    private void setUserInfo(String account, UserInfo userInfo) {
-        Subscriber<EntityResponse> subscriber = new Subscriber<EntityResponse>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(EntityResponse entityResponse) {
-                if (entityResponse.getCode().equals("0")) {
-                    Log.d("yzw", "success");
-                } else {
-                    Toast.makeText(MainActivity.this, "请求出错", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        Network.getInstance().setUserInfo(account, userInfo).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 
     private void showGoods() {
