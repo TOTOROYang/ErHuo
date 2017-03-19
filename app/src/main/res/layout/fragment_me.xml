@@ -11,6 +11,12 @@
         android:background="@color/gray">
 
         <ImageView
+            android:id="@+id/iv_bg_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <ImageView
             android:id="@+id/iv_avatar"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -35,6 +41,7 @@
 
     <Button
         android:id="@+id/btn_my_goods"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="11dp"
@@ -52,6 +59,7 @@
 
     <Button
         android:id="@+id/btn_my_favorite"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/btn_normal"
@@ -64,6 +72,7 @@
 
     <Button
         android:id="@+id/btn_about_erhuo"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="11dp"
@@ -77,6 +86,7 @@
 
     <Button
         android:id="@+id/btn_exit_or_login"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="11dp"

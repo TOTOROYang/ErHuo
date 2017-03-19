@@ -70,7 +70,8 @@ public class MainActivity extends BaseActivity {
      * 初始化话界面和数据
      */
     private void initUiAndData() {
-        toolBar.setTitleTextColor(Color.WHITE);
+        toolBar.setTitle("");
+        toolBar.setLogo(R.drawable.toolbar_logo);
         setSupportActionBar(toolBar);
 
         if (PreferenceUtils.getInstance().getIsLogin()) {

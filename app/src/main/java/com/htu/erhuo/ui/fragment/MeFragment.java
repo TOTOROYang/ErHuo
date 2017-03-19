@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
@@ -25,6 +26,7 @@ import com.htu.erhuo.utiles.PreferenceUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Description
@@ -44,10 +46,12 @@ public class MeFragment extends Fragment {
     Button btnMyGoods;
     @BindView(R.id.btn_my_favorite)
     Button btnMyFavorite;
-    @BindView(R.id.btn_about_erhuo)
-    Button btnAboutErhuo;
     @BindView(R.id.btn_exit_or_login)
     Button btnExitOrLogin;
+    @BindView(R.id.btn_about_erhuo)
+    Button btnAboutErhuo;
+    @BindView(R.id.iv_bg_avatar)
+    ImageView ivBgAvatar;
 
     boolean isLogin;
     String account;
@@ -75,9 +79,14 @@ public class MeFragment extends Fragment {
     private void init() {
         if (mUserInfo != null) {
             tvName.setText(TextUtils.isEmpty(mUserInfo.getNickName()) ? name : mUserInfo.getNickName());
-        }else{
+        } else {
             tvName.setText("游客");
         }
+        Glide.with(getActivity())
+                .load(R.mipmap.ic_launcher)
+                .crossFade(1000)
+                .bitmapTransform(new BlurTransformation(getActivity(), Glide.get(getActivity()).getBitmapPool(), 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+                .into(ivBgAvatar);
         if (isLogin) {
             btnExitOrLogin.setText("退出账号");
         } else {

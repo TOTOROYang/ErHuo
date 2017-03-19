@@ -81,13 +81,13 @@ public class SetPersonalInfoActivity extends BaseActivity {
         toolBar.setTitleTextColor(Color.WHITE);
         toolBar.setTitle(R.string.str_personal_info);
         toolBar.setNavigationIcon(R.drawable.ic_arrow_back_white_36dp);
+        setSupportActionBar(toolBar);
         toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        setSupportActionBar(toolBar);
 
         account = getIntent().getStringExtra("account");
         mUserInfo = EHApplication.getInstance().getUserInfo();
