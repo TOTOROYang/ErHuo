@@ -105,6 +105,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
         account = getIntent().getStringExtra("account");
         mUserInfo = EHApplication.getInstance().getUserInfo();
         localUserInfo = mUserInfo;
+        setResult(1);
         init();
     }
 
@@ -201,7 +202,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_SET_AVATAR) {
-            if (data.getData() != null) {
+            if (data != null && data.getData() != null) {
                 Uri selectedImage = data.getData();
                 String avatarPath = selectedImage.toString();
                 if (selectedImage.toString().contains("content")) {
@@ -319,6 +320,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
                     mUserInfo = localUserInfo;
                     hideLoadingDialog();
                     init();
+                    setResult(0);
                 } else {
                     Toast.makeText(SetPersonalInfoActivity.this, "设置失败", Toast.LENGTH_SHORT).show();
                 }

@@ -36,6 +36,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class MeFragment extends Fragment {
 
+    private final static int REQUEST_SET_PERSON_INFO = 0;
 
     @BindView(R.id.iv_avatar)
     ImageView ivAvatar;
@@ -68,12 +69,12 @@ public class MeFragment extends Fragment {
         account = getArguments().getString("account");
         name = getArguments().getString("name");
         mUserInfo = EHApplication.getInstance().getUserInfo();
+        init();
         return view;
     }
 
     @Override
     public void onResume() {
-        init();
         super.onResume();
     }
 
@@ -109,7 +110,7 @@ public class MeFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("account", account);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_SET_PERSON_INFO);
         } else {
             Toast.makeText(getActivity(), "请先登录,才能进入个人设置", Toast.LENGTH_SHORT).show();
         }
@@ -146,6 +147,14 @@ public class MeFragment extends Fragment {
             PreferenceUtils.getInstance().setUserName("");
             startActivity(new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SET_PERSON_INFO && resultCode == 0) {
+            init();
         }
     }
 }
