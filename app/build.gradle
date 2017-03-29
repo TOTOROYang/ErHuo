@@ -19,12 +19,21 @@ android {
     }
     productFlavors {
     }
+
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/aidl', 'src/main/aidl/']
+            jniLibs.srcDirs = ['src/main/jniLibs']
+            jni.srcDirs = [] // This prevents the auto generation of Android.mk
+        }
+    }
 }
 
 apply plugin: 'org.greenrobot.greendao'
 greendao {
     schemaVersion 1000
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

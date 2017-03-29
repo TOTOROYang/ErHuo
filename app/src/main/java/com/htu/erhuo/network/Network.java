@@ -29,8 +29,8 @@ import rx.schedulers.Schedulers;
  */
 
 public class Network {
-    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
-    //    private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
+//    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
+        private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;

@@ -102,3 +102,5 @@ public static java.lang.String TABLENAME;
 -keep class com.alibaba.sdk.android.oss.** { *; }
 -dontwarn okio.**
 -dontwarn org.apache.commons.codec.binary.**
+
+-keep class public class * implements com.bumptech.glide.module.GlideModule

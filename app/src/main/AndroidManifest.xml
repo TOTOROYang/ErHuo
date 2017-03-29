@@ -34,7 +34,11 @@
             android:name=".ui.LoginActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity android:name=".ui.SetPersonalInfoActivity" />
-        <activity android:name=".ui.SetInfoActivity"></activity>
+        <activity android:name=".ui.SetInfoActivity" />
+
+        <meta-data
+            android:name="com.htu.erhuo.utils.EHGlideModule"
+            android:value="GlideModule" />
     </application>
 
 </manifest>

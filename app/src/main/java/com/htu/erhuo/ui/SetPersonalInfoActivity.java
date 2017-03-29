@@ -2,6 +2,7 @@ package com.htu.erhuo.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,10 @@ import com.htu.erhuo.network.Network;
 import com.htu.erhuo.utils.FileUtils;
 import com.htu.erhuo.utils.ImageUtils;
 import com.htu.erhuo.utils.Utile;
+import com.htu.erhuo.utils.WebPUtil;
+import com.htu.erhuo.utils.crop.CropUtil;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -208,7 +213,8 @@ public class SetPersonalInfoActivity extends BaseActivity {
                 if (selectedImage.toString().contains("content")) {
                     avatarPath = Utile.getRealPathFromURI(this, selectedImage);
                 }
-                uploadAvatar(avatarPath);
+                Log.d("yzw","upload file path "+avatarPath);
+                uploadAvatar(cropImg(avatarPath));
             }
         }
         if (requestCode == REQUEST_SET_NAME) {
@@ -327,5 +333,34 @@ public class SetPersonalInfoActivity extends BaseActivity {
             }
         };
         Network.getInstance().setUserInfo(account, userInfo).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+    private String cropImg(String imagePath) {
+        File imageFile = new File(imagePath);
+        if (imageFile.exists()) {
+            int exifRotation;
+            Bitmap mImgBmp;
+//            exifRotation = CropUtil.getExifRotation(imageFile);
+            mImgBmp = CropUtil.rotaingImageView(0,
+                    ImageUtils.decodeBitmapFromSDCard(imagePath, 1080, 1920));
+            String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1,
+                    imagePath.lastIndexOf(".")) + (imagePath.endsWith(".gif") ? ".gif" : ".webp");
+            File saveFile = new File(FileUtils.IMG_SAVE_PATH + fileName);
+
+            if (fileName.endsWith(".gif")) {
+                if (!FileUtils.getInstance().isExists(FileUtils.IMG_SAVE_PATH + fileName)) {
+                    FileUtils.getInstance().copyFile(imagePath, FileUtils.IMG_SAVE_PATH + fileName);
+                }
+            } else {
+                if (!imagePath.endsWith(".webp")) {
+                    WebPUtil.with(mContext).imageToWebp(mImgBmp, saveFile);
+                } else if (!FileUtils.getInstance().isExists(FileUtils.IMG_SAVE_PATH + fileName)) {
+                    ImageUtils.savePhotoToSDCard(mImgBmp, FileUtils.IMG_SAVE_PATH, fileName);
+                }
+            }
+            if (mImgBmp != null && !mImgBmp.isRecycled()) mImgBmp.recycle();
+            return FileUtils.IMG_SAVE_PATH + fileName;
+        }
+        return "";
     }
 }
