@@ -39,6 +39,8 @@
         <meta-data
             android:name="com.htu.erhuo.utils.EHGlideModule"
             android:value="GlideModule" />
+
+        <activity android:name=".ui.GoodsCreateActivity"></activity>
     </application>
 
 </manifest>

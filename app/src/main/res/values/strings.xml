@@ -23,4 +23,6 @@
     <string name="str_qq">QQ号</string>
     <string name="confirm">确定</string>
     <string name="uploading">正在上传</string>
+    <string name="str_goods_create">发布商品</string>
+    <string name="str_goods_description_hint">请输入商品描述...</string>
 </resources>

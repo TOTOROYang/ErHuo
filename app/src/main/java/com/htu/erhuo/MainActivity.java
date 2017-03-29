@@ -1,5 +1,6 @@
 package com.htu.erhuo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -18,6 +19,7 @@ import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.BaseActivity;
+import com.htu.erhuo.ui.GoodsCreateActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
 import com.htu.erhuo.ui.fragment.MeFragment;
 import com.htu.erhuo.ui.fragment.MyFragment;
@@ -104,11 +106,11 @@ public class MainActivity extends BaseActivity {
     void clickFabCreate(View v) {
         switch (v.getId()) {
             case R.id.fab_create:
-                Log.d("yzw", "create");
-                Toast.makeText(this, "发布", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, GoodsCreateActivity.class);
+                intent.putExtra("account", account);
+                startActivity(intent);
                 break;
             case R.id.iv_main:
-                Log.d("yzw", "main");
                 showGoods();
                 break;
             case R.id.iv_me:

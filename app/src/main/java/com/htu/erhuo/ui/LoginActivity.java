@@ -197,14 +197,15 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login)
     public void clickBtnLogin() {
-        if (checkInput()) {
-            showLoadingDialog("正在登录");
-            account = etAccount.getText().toString();
-            password = etPassword.getText().toString();
-            verify = etVerification.getText().toString();
-            webViewPage = WEB_PAGE_LOGIN;
-            webJw.loadUrl("javascript:test('" + account + "','" + password + "','" + verify + "')");
-        }
+        requestServerToLogin(etAccount.getText().toString(), "杨正威");
+//        if (checkInput()) {
+//            showLoadingDialog("正在登录");
+//            account = etAccount.getText().toString();
+//            password = etPassword.getText().toString();
+//            verify = etVerification.getText().toString();
+//            webViewPage = WEB_PAGE_LOGIN;
+//            webJw.loadUrl("javascript:test('" + account + "','" + password + "','" + verify + "')");
+//        }
     }
 
     private boolean checkInput() {

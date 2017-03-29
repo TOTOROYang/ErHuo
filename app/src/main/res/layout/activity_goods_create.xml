@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_goods_create"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_color"
+    android:orientation="vertical"
+    tools:context="com.htu.erhuo.ui.GoodsCreateActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:title="@string/str_goods_create" />
+
+    <EditText
+        android:id="@+id/tv_goods_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="11dp"
+        android:background="@null"
+        android:gravity="start|top"
+        android:hint="@string/str_goods_description_hint"
+        android:inputType="textMultiLine"
+        android:minHeight="200dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray" />
+
+    <GridView
+        android:id="@+id/gv_goods_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="11dp"
+        android:background="@null"
+        android:columnWidth="111dp"
+        android:numColumns="3"
+        android:scrollbars="none" />
+</LinearLayout>
