@@ -36,7 +36,7 @@ public class ImageUtils {
             @Override
             public void run() {
                 try {
-                    final String url = EHApplication.getInstance().getOss().presignConstrainedObjectURL(FileUtils.ERHUO_BUCKET, imageName, 30 * 60);
+                    final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
                     Log.d("yzw", "imageUrl " + url);
                     activity.runOnUiThread(new Runnable() {
                         @Override
@@ -77,6 +77,12 @@ public class ImageUtils {
         }).start();
     }
 
+    public static void showImageRes(Activity activity, ImageView imageView, int resId) {
+        Glide.with(activity)
+                .load(resId)
+                .into(imageView);
+    }
+
     public static void showGaussImageRes(Activity activity, ImageView imageView, int resId) {
         Glide.with(activity)
                 .load(resId)
@@ -89,7 +95,7 @@ public class ImageUtils {
             @Override
             public void run() {
                 try {
-                    final String url = EHApplication.getInstance().getOss().presignConstrainedObjectURL(FileUtils.ERHUO_BUCKET, imageName, 30 * 60);
+                    final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
                     Log.d("yzw", "imageUrl " + url);
                     activity.runOnUiThread(new Runnable() {
                         @Override
@@ -111,6 +117,7 @@ public class ImageUtils {
             }
         }).start();
     }
+
     /**
      * 计算BitmapFactory的inSample
      */
@@ -131,6 +138,7 @@ public class ImageUtils {
         }
         return inSampleSize;
     }
+
     public static Bitmap decodeBitmapFromSDCard(String path, int reqWidth, int reqHeight) {
         // 第一次解析将inJustDecodeBounds设置为true，来获取图片大小
         final BitmapFactory.Options options = new BitmapFactory.Options();

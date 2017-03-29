@@ -27,15 +27,30 @@
         android:inputType="textMultiLine"
         android:minHeight="200dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/gray" />
+        android:textColorHint="@color/gray"
+        android:textSize="16sp" />
 
     <GridView
         android:id="@+id/gv_goods_picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="11dp"
-        android:background="@null"
-        android:columnWidth="111dp"
+        android:columnWidth="90dp"
+        android:gravity="center_horizontal"
         android:numColumns="3"
-        android:scrollbars="none" />
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="11dp" />
+
+    <Button
+        android:id="@+id/btn_goods_create"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="11dp"
+        android:background="@drawable/btn_normal"
+        android:text="@string/str_create"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 </LinearLayout>

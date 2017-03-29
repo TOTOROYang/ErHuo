@@ -2,12 +2,15 @@ package com.htu.erhuo.network;
 
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.ErhuoOssToken;
+import com.htu.erhuo.entity.ItemInfo;
+import com.htu.erhuo.entity.ItemQueryCondition;
 import com.htu.erhuo.entity.MovieEntity;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.api.Api;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
@@ -29,8 +32,8 @@ import rx.schedulers.Schedulers;
  */
 
 public class Network {
-//    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
-        private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
+    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
+    //    private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -131,5 +134,22 @@ public class Network {
     public Observable<EntityResponse<ErhuoOssToken>> getOssToken(String key) {
         return api.getOssToken(key)
                 .subscribeOn(Schedulers.immediate());
+    }
+
+    public Observable<EntityResponse> createGoods(ItemInfo itemInfo) {
+        return api.createGoods(itemInfo).subscribeOn(Schedulers.io());
+    }
+
+    public Observable<EntityResponse<List<ItemInfo>>> getGoodsList(ItemQueryCondition itemQueryCondition) {
+        return api.getGoodsList(itemQueryCondition.sid,
+                itemQueryCondition.title,
+                itemQueryCondition.creator,
+                itemQueryCondition.status,
+                itemQueryCondition.priceLow,
+                itemQueryCondition.priceHigh,
+                itemQueryCondition.rule,
+                itemQueryCondition.page,
+                itemQueryCondition.offset,
+                itemQueryCondition.limit).subscribeOn(Schedulers.io());
     }
 }
