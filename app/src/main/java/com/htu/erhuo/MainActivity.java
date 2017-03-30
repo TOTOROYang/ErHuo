@@ -16,14 +16,20 @@ import android.widget.Toast;
 
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.EntityResponse;
+import com.htu.erhuo.entity.ItemInfo;
+import com.htu.erhuo.entity.ItemQueryCondition;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.BaseActivity;
 import com.htu.erhuo.ui.GoodsCreateActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
+import com.htu.erhuo.ui.fragment.MainGoodsFragment;
 import com.htu.erhuo.ui.fragment.MeFragment;
 import com.htu.erhuo.ui.fragment.MyFragment;
 import com.htu.erhuo.utils.PreferenceUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +59,7 @@ public class MainActivity extends BaseActivity {
     AppBarLayout appBarLayout;
 
     MeFragment meFragment;
+    MainGoodsFragment mainGoodsFragment;
 
     boolean isLogin;
     String account;
@@ -84,15 +91,18 @@ public class MainActivity extends BaseActivity {
         }
 
         MyViewPagerAdapter adapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MyFragment(), "最新");
-        adapter.addFragment(new MyFragment(), "价格");
-        adapter.addFragment(new MyFragment(), "喜欢");
+        mainGoodsFragment = new MainGoodsFragment();
         meFragment = new MeFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean("isLogin", isLogin);
         bundle.putString("account", account);
         bundle.putString("name", name);
+        mainGoodsFragment.setArguments(bundle);
         meFragment.setArguments(bundle);
+
+        adapter.addFragment(mainGoodsFragment, "最新");
+        adapter.addFragment(new MyFragment(), "价格");
+        adapter.addFragment(new MyFragment(), "喜欢");
         vpGoods.setAdapter(adapter);
         tabLayout.setupWithViewPager(vpGoods);
 
@@ -162,5 +172,4 @@ public class MainActivity extends BaseActivity {
         if (!meFragment.isAdded())
             getSupportFragmentManager().beginTransaction().add(R.id.rl_me, meFragment).commit();
     }
-
 }

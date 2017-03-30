@@ -14,7 +14,7 @@ public class ItemInfo {
 
     private String sortId;
 
-    private Date createTime;
+    private Long createTime;
 
     private String creator;
 
@@ -70,11 +70,11 @@ public class ItemInfo {
         this.sortId = sortId == null ? null : sortId.trim();
     }
 
-    public Date getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 

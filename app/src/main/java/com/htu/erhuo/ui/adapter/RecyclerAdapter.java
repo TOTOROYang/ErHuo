@@ -56,14 +56,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
         ImageView ivGoodsAvatarItem;
         @BindView(R.id.tv_text_item)
         TextView tvTextItem;
-        @BindView(R.id.iv_goods_time_item)
-        TextView ivGoodsTimeItem;
+        @BindView(R.id.tv_goods_time_item)
+        TextView tvGoodsTimeItem;
         @BindView(R.id.tv_goods_description_item)
         TextView tvGoodsDescriptionItem;
-        @BindView(R.id.iv_goods_img_itme)
-        ImageView ivGoodsImgItme;
-        @BindView(R.id.iv_goods_img2_itme)
-        ImageView ivGoodsImg2Itme;
+        @BindView(R.id.iv_goods_img_item)
+        ImageView ivGoodsImgItem;
+        @BindView(R.id.iv_goods_img2_item)
+        ImageView ivGoodsImg2Item;
 
         MyHolder(View itemView) {
             super(itemView);

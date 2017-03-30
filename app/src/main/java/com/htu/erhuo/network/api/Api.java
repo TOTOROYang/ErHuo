@@ -1,7 +1,5 @@
 package com.htu.erhuo.network.api;
 
-import android.content.ClipData;
-
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.ErhuoOssToken;
 import com.htu.erhuo.entity.ItemInfo;
@@ -12,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;

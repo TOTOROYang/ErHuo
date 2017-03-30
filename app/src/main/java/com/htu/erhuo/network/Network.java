@@ -32,8 +32,8 @@ import rx.schedulers.Schedulers;
  */
 
 public class Network {
-    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
-    //    private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
+    //    private static final String BASE_URL = "http://192.168.2.198:8080/erhuo/";
+    private static final String BASE_URL = "http://120.24.223.217:8080/erhuo/";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
@@ -102,18 +102,6 @@ public class Network {
     //获取单例
     public static Network getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-    /**
-     * demo
-     * 用于获取豆瓣电影Top250的数据
-     *
-     * @param start 起始位置
-     * @param count 获取长度
-     */
-    public Observable<MovieEntity> getTopMovie(int start, int count) {
-        return api.getTopMovie(start, count)
-                .subscribeOn(Schedulers.io());
     }
 
     public Observable<EntityResponse> login(UserInfo userinfo) {

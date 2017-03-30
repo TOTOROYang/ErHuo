@@ -104,3 +104,7 @@ public static java.lang.String TABLENAME;
 -dontwarn org.apache.commons.codec.binary.**
 
 -keep class public class * implements com.bumptech.glide.module.GlideModule
+
+-keep class com.chad.library.adapter.** {
+   *;
+}

@@ -80,9 +80,9 @@ public class ItemQueryCondition {
         private BigDecimal priceLow;
         private BigDecimal priceHigh;
         private String rule;
-        private int page = 0;
+        private int page = 1;
         private int offset = 0;
-        private int limit = 20;
+        private int limit = 5;
 
         public Builder() {
         }

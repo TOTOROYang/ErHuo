@@ -65,14 +65,7 @@ public class GoodsCreateActivity extends BaseActivity {
 
         picList = new ArrayList<>();
         picList.add("add");
-        picList.add("add");
-        picList.add("add");
-        picList.add("add");
-        picList.add("add");
-        picList.add("add");
-        picList.add("add");
-        picList.add("add");
-        picList.add("add");
+
         goodsCreatePictureAdapter = new GoodsCreatePictureAdapter(this);
         goodsCreatePictureAdapter.setData(picList);
         gvGoodsPicture.setAdapter(goodsCreatePictureAdapter);
@@ -113,7 +106,7 @@ public class GoodsCreateActivity extends BaseActivity {
         BigDecimal bigDecimal = new BigDecimal("6.66");
         itemInfo.setPrice(bigDecimal);
         itemInfo.setSortId("101");
-        itemInfo.setPhotoList("123,456,789");
+        itemInfo.setPhotoList("1308424017_1490792612878.webp,");
 
         Subscriber<EntityResponse> subscriber = new Subscriber<EntityResponse>() {
             @Override
