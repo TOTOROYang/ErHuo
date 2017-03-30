@@ -48,7 +48,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
 
     public final static int REQUEST_SET_AVATAR = 0;
     public final static int REQUEST_SET_NAME = 1;
-//    public final static int REQUEST_SET_SEX = 2;
+    //    public final static int REQUEST_SET_SEX = 2;
     public final static int REQUEST_SET_SIGN = 3;
     public final static int REQUEST_SET_PHONE = 4;
     public final static int REQUEST_SET_WECHAT = 5;
@@ -213,7 +213,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
                 if (selectedImage.toString().contains("content")) {
                     avatarPath = Utile.getRealPathFromURI(this, selectedImage);
                 }
-                Log.d("yzw","upload file path "+avatarPath);
+                Log.d("yzw", "upload file path " + avatarPath);
                 uploadAvatar(cropImg(avatarPath));
             }
         }

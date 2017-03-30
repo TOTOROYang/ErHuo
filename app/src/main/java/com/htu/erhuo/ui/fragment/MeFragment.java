@@ -19,6 +19,7 @@ import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.ui.LoginActivity;
+import com.htu.erhuo.ui.MyGoodsActivity;
 import com.htu.erhuo.ui.SetPersonalInfoActivity;
 import com.htu.erhuo.utils.DialogUtil;
 import com.htu.erhuo.utils.ImageUtils;
@@ -113,6 +114,21 @@ public class MeFragment extends Fragment {
             startActivityForResult(intent, REQUEST_SET_PERSON_INFO);
         } else {
             Toast.makeText(getActivity(), "请先登录,才能进入个人设置", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @OnClick(R.id.btn_my_goods)
+    void clickMyGoods() {
+        if (isLogin) {
+            Intent intent = new Intent(getContext(), MyGoodsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("account", account);
+            bundle.putString("name", name);
+            bundle.putBoolean("isLogin", true);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
         }
     }
 
