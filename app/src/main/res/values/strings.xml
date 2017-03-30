@@ -25,5 +25,7 @@
     <string name="uploading">正在上传</string>
     <string name="str_goods_create">发布商品</string>
     <string name="str_goods_description_hint">请输入商品描述...</string>
+    <string name="str_goods_title_hint">请输入商品标题...</string>
+    <string name="str_goods_price_hint">请输入商品价格...</string>
     <string name="str_create">发布</string>
 </resources>

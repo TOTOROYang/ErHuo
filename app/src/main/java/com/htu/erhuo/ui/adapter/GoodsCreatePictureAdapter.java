@@ -2,6 +2,7 @@ package com.htu.erhuo.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -56,10 +57,12 @@ public class GoodsCreatePictureAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        if (data.get(position).equals("add")) {
-            ImageUtils.showImageRes((Activity) context, holder.imageView, R.drawable.main_icon);
-        }
 
+        if (data.get(position).equals("add")) {
+            ImageUtils.showImageRes((Activity) context, holder.imageView, R.drawable.add_pic_goods_create);
+        } else {
+            ImageUtils.showImage((Activity) context, holder.imageView, data.get(position));
+        }
         return convertView;
     }
 
@@ -71,7 +74,7 @@ public class GoodsCreatePictureAdapter extends BaseAdapter {
         this.data = data;
     }
 
-    public static class ViewHolder {
+    private class ViewHolder {
         ImageView imageView;
     }
 }

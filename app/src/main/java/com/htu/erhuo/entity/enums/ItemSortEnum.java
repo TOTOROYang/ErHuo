@@ -42,4 +42,14 @@ public enum ItemSortEnum {
         }
         return null;
     }
+
+    public static String idOf(String name){
+        for (ItemSortEnum itemSortEnum : values()) {
+            if (itemSortEnum.name.equals(name)) {
+                return itemSortEnum.getId();
+            }
+        }
+        return null;
+    }
+
 }

@@ -93,11 +93,15 @@ public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.On
 
             @Override
             public void onNext(EntityResponse<List<ItemInfo>> listEntityResponse) {
-                if (listEntityResponse.getCode().equals("0") && listEntityResponse.getMsg() != null) {
-                    if (itemInfos == null) itemInfos = new ArrayList<>();
-                    itemInfos.addAll(listEntityResponse.getMsg());
-                    count = listEntityResponse.getMsg().size();
-                } else {
+                if (listEntityResponse.getCode().equals("0"))
+                    if (listEntityResponse.getMsg() != null) {
+                        if (itemInfos == null) itemInfos = new ArrayList<>();
+                        itemInfos.addAll(listEntityResponse.getMsg());
+                        count = listEntityResponse.getMsg().size();
+                    } else {
+                        count = 0;
+                    }
+                else {
                     itemInfos = new ArrayList<>();
                     count = 0;
                 }
@@ -134,5 +138,9 @@ public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.On
         } else {
             adapter.loadMoreEnd();
         }
+    }
+
+    public void refreshAfterCreateGoods() {
+        refreshData();
     }
 }

@@ -39,6 +39,8 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends BaseActivity {
 
+    private final static int REQUEST_CREATE_GOODS = 0;
+
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
     @BindView(R.id.tab_layout)
@@ -118,13 +120,17 @@ public class MainActivity extends BaseActivity {
             case R.id.fab_create:
                 Intent intent = new Intent(this, GoodsCreateActivity.class);
                 intent.putExtra("account", account);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CREATE_GOODS);
                 break;
             case R.id.iv_main:
+                ivMain.setImageResource(R.drawable.icon_main);
+                ivMe.setImageResource(R.drawable.icon_me_unpress);
                 showGoods();
                 break;
             case R.id.iv_me:
                 showMe();
+                ivMain.setImageResource(R.drawable.icon_main_unpress);
+                ivMe.setImageResource(R.drawable.icon_me);
                 break;
         }
     }
@@ -171,5 +177,15 @@ public class MainActivity extends BaseActivity {
         rlMe.setVisibility(View.VISIBLE);
         if (!meFragment.isAdded())
             getSupportFragmentManager().beginTransaction().add(R.id.rl_me, meFragment).commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CREATE_GOODS) {
+            if (resultCode == 0) {
+                mainGoodsFragment.refreshAfterCreateGoods();
+            }
+        }
     }
 }

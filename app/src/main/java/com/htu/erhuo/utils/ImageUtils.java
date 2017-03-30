@@ -32,49 +32,59 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class ImageUtils {
 
     public static void showImage(final Activity activity, final ImageView imageView, final String imageName) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
-                    Log.d("yzw", "imageUrl " + url);
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.with(activity)
-                                    .load(url)
-                                    .into(imageView);
-                        }
-                    });
-                } catch (Exception e) {
-                    Log.d("yzw", "图片展示失败 " + imageName);
-                }
-            }
-        }).start();
-
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
+//                    Log.d("yzw", "imageUrl " + url);
+//                    activity.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Glide.with(activity)
+//                                    .load(url)
+//                                    .into(imageView);
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    Log.d("yzw", "图片展示失败 " + imageName);
+//                }
+//            }
+//        }).start();
+        final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
+        Log.d("yzw", "imageUrl " + url);
+        Glide.with(activity)
+                .load(url)
+                .into(imageView);
     }
 
     public static void showGaussImage(final Activity activity, final ImageView imageView, final String imageName) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final String url = EHApplication.getInstance().getOss().presignConstrainedObjectURL(FileUtils.ERHUO_BUCKET, imageName, 30 * 60);
-                    Log.d("yzw", "imageUrl " + url);
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.with(activity)
-                                    .load(url)
-                                    .bitmapTransform(new BlurTransformation(EHApplication.getInstance(), Glide.get(EHApplication.getInstance()).getBitmapPool(), 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
-                                    .into(imageView);
-                        }
-                    });
-                } catch (Exception e) {
-                    Log.d("yzw", "图片展示失败 " + imageName);
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    final String url = EHApplication.getInstance().getOss().presignConstrainedObjectURL(FileUtils.ERHUO_BUCKET, imageName, 30 * 60);
+//                    Log.d("yzw", "imageUrl " + url);
+//                    activity.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Glide.with(activity)
+//                                    .load(url)
+//                                    .bitmapTransform(new BlurTransformation(EHApplication.getInstance(), Glide.get(EHApplication.getInstance()).getBitmapPool(), 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+//                                    .into(imageView);
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    Log.d("yzw", "图片展示失败 " + imageName);
+//                }
+//            }
+//        }).start();
+        final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
+        Log.d("yzw", "imageUrl " + url);
+        Glide.with(activity)
+                .load(url)
+                .bitmapTransform(new BlurTransformation(EHApplication.getInstance(), Glide.get(EHApplication.getInstance()).getBitmapPool(), 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+                .into(imageView);
     }
 
     public static void showImageRes(Activity activity, ImageView imageView, int resId) {
@@ -91,31 +101,41 @@ public class ImageUtils {
     }
 
     public static void showNormalAndGaussImage(final Activity activity, final ImageView ivAvatar, final ImageView ivBgAvatar, final String imageName) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
-                    Log.d("yzw", "imageUrl " + url);
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.with(activity)
-                                    .load(url)
-                                    .bitmapTransform(new ColorFilterTransformation(activity, 0x7f000000), new BlurTransformation(activity, 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
-                                    .into(ivBgAvatar);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
+//                    Log.d("yzw", "imageUrl " + url);
+//                    activity.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Glide.with(activity)
+//                                    .load(url)
+//                                    .bitmapTransform(new ColorFilterTransformation(activity, 0x7f000000), new BlurTransformation(activity, 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+//                                    .into(ivBgAvatar);
+//
+//                            Glide.with(activity)
+//                                    .load(url)
+//                                    .bitmapTransform(new CropCircleTransformation(activity))
+//                                    .into(ivAvatar);
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    Log.d("yzw", "图片展示失败 " + imageName);
+//                }
+//            }
+//        }).start();
+        final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
+        Glide.with(activity)
+                .load(url)
+                .bitmapTransform(new ColorFilterTransformation(activity, 0x7f000000), new BlurTransformation(activity, 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+                .into(ivBgAvatar);
 
-                            Glide.with(activity)
-                                    .load(url)
-                                    .bitmapTransform(new CropCircleTransformation(activity))
-                                    .into(ivAvatar);
-                        }
-                    });
-                } catch (Exception e) {
-                    Log.d("yzw", "图片展示失败 " + imageName);
-                }
-            }
-        }).start();
+        Glide.with(activity)
+                .load(url)
+                .bitmapTransform(new CropCircleTransformation(activity))
+                .into(ivAvatar);
     }
 
     /**

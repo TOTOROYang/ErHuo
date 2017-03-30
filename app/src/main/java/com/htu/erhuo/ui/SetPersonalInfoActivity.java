@@ -48,7 +48,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
 
     public final static int REQUEST_SET_AVATAR = 0;
     public final static int REQUEST_SET_NAME = 1;
-    public final static int REQUEST_SET_SEX = 2;
+//    public final static int REQUEST_SET_SEX = 2;
     public final static int REQUEST_SET_SIGN = 3;
     public final static int REQUEST_SET_PHONE = 4;
     public final static int REQUEST_SET_WECHAT = 5;
@@ -338,9 +338,7 @@ public class SetPersonalInfoActivity extends BaseActivity {
     private String cropImg(String imagePath) {
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
-            int exifRotation;
             Bitmap mImgBmp;
-//            exifRotation = CropUtil.getExifRotation(imageFile);
             mImgBmp = CropUtil.rotaingImageView(0,
                     ImageUtils.decodeBitmapFromSDCard(imagePath, 1080, 1920));
             String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1,
