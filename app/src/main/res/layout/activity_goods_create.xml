@@ -16,95 +16,107 @@
         android:background="@color/colorPrimary"
         android:title="@string/str_goods_create" />
 
-    <EditText
-        android:id="@+id/et_goods_title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="11dp"
-        android:background="@drawable/bg_edit_text"
-        android:gravity="start|center_vertical"
-        android:hint="@string/str_goods_title_hint"
-        android:maxLines="1"
-        android:minHeight="200dp"
-        android:padding="11dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:textSize="18sp" />
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginBottom="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginStart="11dp">
-
-        <EditText
-            android:id="@+id/et_goods_price"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginEnd="11dp"
-            android:layout_toStartOf="@+id/tv_choose_sort"
-            android:background="@drawable/bg_edit_text"
-            android:gravity="start|center_vertical"
-            android:hint="@string/str_goods_price_hint"
-            android:inputType="numberDecimal"
-            android:maxLines="1"
-            android:minHeight="200dp"
-            android:padding="11dp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/gray"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_choose_sort"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/bg_edit_text"
-            android:gravity="center"
-            android:text="其他"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
-    </RelativeLayout>
 
-    <EditText
-        android:id="@+id/et_goods_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginStart="11dp"
-        android:background="@drawable/bg_edit_text"
-        android:gravity="start|top"
-        android:hint="@string/str_goods_description_hint"
-        android:inputType="textMultiLine"
-        android:minHeight="200dp"
-        android:padding="11dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray"
-        android:textSize="16sp" />
+            <EditText
+                android:id="@+id/et_goods_title"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="11dp"
+                android:background="@drawable/bg_edit_text"
+                android:gravity="start|center_vertical"
+                android:hint="@string/str_goods_title_hint"
+                android:maxLines="1"
+                android:minHeight="200dp"
+                android:padding="11dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="18sp" />
 
-    <GridView
-        android:id="@+id/gv_goods_picture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="11dp"
-        android:columnWidth="90dp"
-        android:gravity="center_horizontal"
-        android:numColumns="3"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="11dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginStart="11dp">
 
-    <Button
-        android:id="@+id/btn_goods_create"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="11dp"
-        android:background="@drawable/btn_normal"
-        android:text="@string/str_create"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+                <EditText
+                    android:id="@+id/et_goods_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_toStartOf="@+id/tv_choose_sort"
+                    android:background="@drawable/bg_edit_text"
+                    android:gravity="start|center_vertical"
+                    android:hint="@string/str_goods_price_hint"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:minHeight="200dp"
+                    android:padding="11dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_choose_sort"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_edit_text"
+                    android:gravity="center"
+                    android:text="@string/str_other"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/et_goods_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="11dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginStart="11dp"
+                android:background="@drawable/bg_edit_text"
+                android:gravity="start|top"
+                android:hint="@string/str_goods_description_hint"
+                android:inputType="textMultiLine"
+                android:minHeight="200dp"
+                android:padding="11dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="16sp" />
+
+            <com.htu.erhuo.ui.view.ScrollGridView
+                android:id="@+id/gv_goods_picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="11dp"
+                android:columnWidth="90dp"
+                android:gravity="center_horizontal"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="11dp" />
+
+            <Button
+                android:id="@+id/btn_goods_create"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="11dp"
+                android:background="@drawable/btn_normal"
+                android:text="@string/str_create"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

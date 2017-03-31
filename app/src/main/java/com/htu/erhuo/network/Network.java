@@ -140,4 +140,8 @@ public class Network {
                 itemQueryCondition.offset,
                 itemQueryCondition.limit).subscribeOn(Schedulers.io());
     }
+
+    public Observable<EntityResponse<ItemInfo>> getGoodsDetail(String itemId) {
+        return api.getGoodsDetail(itemId).subscribeOn(Schedulers.io());
+    }
 }

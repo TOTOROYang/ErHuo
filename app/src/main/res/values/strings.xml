@@ -32,4 +32,5 @@
     <string name="str_about_team">团队介绍</string>
     <string name="str_about_reply">信息反馈</string>
     <string name="str_goods_detail">商品详情</string>
+    <string name="str_other">其他</string>
 </resources>

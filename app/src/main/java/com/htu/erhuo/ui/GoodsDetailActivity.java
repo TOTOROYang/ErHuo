@@ -8,17 +8,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.htu.erhuo.R;
+import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.ItemInfo;
-import com.htu.erhuo.ui.adapter.GoodsCreatePictureAdapter;
+import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.adapter.GoodsDetailPictureAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class GoodsDetailActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
@@ -34,10 +40,9 @@ public class GoodsDetailActivity extends BaseActivity implements AdapterView.OnI
     GridView gvGoodsDetailPhoto;
 
     String goodsId;
-    private String account;
     private GoodsDetailPictureAdapter adapter;
     private List<String> picList;
-    ItemInfo itemInfo = new ItemInfo();
+    ItemInfo itemInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +71,54 @@ public class GoodsDetailActivity extends BaseActivity implements AdapterView.OnI
         tvGoodsDetailTitle.requestFocus();
 
         picList = new ArrayList<>();
-        picList.add("1308424017_1490792612878.webp");
-        picList.add("1308424017_1490792612878.webp");
-        picList.add("1308424017_1490792612878.webp");
-
         adapter = new GoodsDetailPictureAdapter(this);
         adapter.setData(picList);
         gvGoodsDetailPhoto.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         gvGoodsDetailPhoto.setOnItemClickListener(this);
+
+        getGoodsDetail();
+    }
+
+    private void getGoodsDetail() {
+        Subscriber<EntityResponse<ItemInfo>> subscriber = new Subscriber<EntityResponse<ItemInfo>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(mContext, "商品详情获取失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(EntityResponse<ItemInfo> itemInfoEntityResponse) {
+                if (itemInfoEntityResponse.getCode().equals("0")) {
+                    itemInfo = itemInfoEntityResponse.getMsg();
+                    showGoodsDetail();
+                } else {
+                    Toast.makeText(mContext, "商品详情获取失败", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        };
+        Network.getInstance().getGoodsDetail(goodsId).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
+    }
+
+    private void showGoodsDetail() {
+        tvGoodsDetailTitle.setText(itemInfo.getItemTitle());
+        tvGoodsDetailDes.setText(itemInfo.getItemDesc());
+        tvGoodsDetailPrice.setText(String.format(Locale.CHINESE, "￥%.2f", itemInfo.getPrice()));
+        String[] photoListString = itemInfo.getPhotoList().split(",");
+        picList.addAll(Arrays.asList(photoListString).subList(1, photoListString.length));
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
+
+
 }

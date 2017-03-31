@@ -58,4 +58,8 @@ public interface Api {
                                                             @Query("p") int page,
                                                             @Query("offset") int office,
                                                             @Query("limit") int limit);
+
+    @GET("item/{itemId}")
+    @Headers("token:need")
+    Observable<EntityResponse<ItemInfo>> getGoodsDetail(@Path("itemId") String itemId);
 }

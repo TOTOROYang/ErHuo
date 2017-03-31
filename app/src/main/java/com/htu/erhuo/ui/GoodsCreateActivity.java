@@ -137,7 +137,8 @@ public class GoodsCreateActivity extends BaseActivity implements AdapterView.OnI
     @OnClick(R.id.btn_goods_create)
     void clickGoodsCreate() {
         if (!isCheckInput()) return;
-        itemInfo.setItemTitle(etGoodsDescription.getText().toString());
+        itemInfo.setItemTitle(etGoodsTitle.getText().toString());
+        itemInfo.setItemDesc(etGoodsDescription.getText().toString());
         itemInfo.setCreator(account);
         BigDecimal bigDecimal = new BigDecimal(etGoodsPrice.getText().toString());
         itemInfo.setPrice(bigDecimal);
