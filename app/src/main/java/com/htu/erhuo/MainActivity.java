@@ -16,8 +16,6 @@ import android.widget.Toast;
 
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.EntityResponse;
-import com.htu.erhuo.entity.ItemInfo;
-import com.htu.erhuo.entity.ItemQueryCondition;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.BaseActivity;
@@ -25,17 +23,16 @@ import com.htu.erhuo.ui.GoodsCreateActivity;
 import com.htu.erhuo.ui.adapter.MyViewPagerAdapter;
 import com.htu.erhuo.ui.fragment.MainGoodsFragment;
 import com.htu.erhuo.ui.fragment.MeFragment;
-import com.htu.erhuo.ui.fragment.MyFragment;
 import com.htu.erhuo.utils.PreferenceUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+
+import static com.htu.erhuo.entity.enums.ItemRankEnum.PRICE_ASC;
+import static com.htu.erhuo.entity.enums.ItemRankEnum.STAR_DESC;
 
 public class MainActivity extends BaseActivity {
 
@@ -62,6 +59,8 @@ public class MainActivity extends BaseActivity {
 
     MeFragment meFragment;
     MainGoodsFragment mainGoodsFragment;
+    MainGoodsFragment mainGoodsFragment2;
+    MainGoodsFragment mainGoodsFragment3;
 
     boolean isLogin;
     String account;
@@ -94,17 +93,24 @@ public class MainActivity extends BaseActivity {
 
         MyViewPagerAdapter adapter = new MyViewPagerAdapter(getSupportFragmentManager());
         mainGoodsFragment = new MainGoodsFragment();
+        mainGoodsFragment2 = new MainGoodsFragment();
+        mainGoodsFragment3 = new MainGoodsFragment();
         meFragment = new MeFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean("isLogin", isLogin);
         bundle.putString("account", account);
         bundle.putString("name", name);
         mainGoodsFragment.setArguments(bundle);
+        mainGoodsFragment2.setArguments(bundle);
+        mainGoodsFragment3.setArguments(bundle);
+        mainGoodsFragment.setRule(null);
+        mainGoodsFragment2.setRule(PRICE_ASC.getCode());
+        mainGoodsFragment3.setRule(STAR_DESC.getCode());
         meFragment.setArguments(bundle);
 
         adapter.addFragment(mainGoodsFragment, "最新");
-        adapter.addFragment(new MyFragment(), "价格");
-        adapter.addFragment(new MyFragment(), "喜欢");
+        adapter.addFragment(mainGoodsFragment2, "价格");
+        adapter.addFragment(mainGoodsFragment3, "喜欢");
         vpGoods.setAdapter(adapter);
         tabLayout.setupWithViewPager(vpGoods);
 

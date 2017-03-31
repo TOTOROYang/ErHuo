@@ -48,6 +48,8 @@ public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.On
     SwipeRefreshLayout slRefresh;
     private ItemQueryCondition itemQueryCondition;
     private GoodsListAdapter adapter;
+    private String rule;
+
 
     @Nullable
     @Override
@@ -69,7 +71,7 @@ public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.On
         slRefresh.setOnRefreshListener(this);
         slRefresh.setColorSchemeResources(R.color.colorPrimary);
         page = 1;
-        itemQueryCondition = new ItemQueryCondition.Builder().page(page).build();
+        itemQueryCondition = new ItemQueryCondition.Builder().page(page).rule(rule).build();
         adapter = new GoodsListAdapter(R.layout.recycler_item);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -142,5 +144,9 @@ public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.On
 
     public void refreshAfterCreateGoods() {
         refreshData();
+    }
+
+    public void setRule(String rule) {
+        this.rule = rule;
     }
 }
