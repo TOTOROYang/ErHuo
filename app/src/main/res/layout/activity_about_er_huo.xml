@@ -12,4 +12,68 @@
         android:background="@color/colorPrimary"
         android:title="@string/str_about_erhuo" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_icon"
+            android:layout_alignStart="@+id/iv_icon"
+            android:layout_alignEnd="@+id/iv_icon"
+            android:text="V1.0.0"
+            android:layout_marginTop="11dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_version"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal_transparent"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_about_version"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+    <Button
+        android:id="@+id/btn_team"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal_transparent"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_about_team"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+    <Button
+        android:id="@+id/btn_reply"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal_transparent"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_about_reply"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 </LinearLayout>

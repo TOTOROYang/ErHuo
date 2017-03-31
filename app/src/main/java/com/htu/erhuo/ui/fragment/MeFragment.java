@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
+import com.htu.erhuo.ui.AboutErHuo;
 import com.htu.erhuo.ui.LoginActivity;
 import com.htu.erhuo.ui.MyGoodsActivity;
 import com.htu.erhuo.ui.SetPersonalInfoActivity;
@@ -130,6 +131,12 @@ public class MeFragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @OnClick(R.id.btn_about_erhuo)
+    void clickAboutErHuo() {
+        Intent intent = new Intent(getContext(), AboutErHuo.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_exit_or_login)

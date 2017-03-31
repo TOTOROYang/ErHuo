@@ -1,19 +1,34 @@
 package com.htu.erhuo.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.htu.erhuo.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AboutErHuo extends BaseActivity {
 
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
+    @BindView(R.id.iv_icon)
+    ImageView ivIcon;
+    @BindView(R.id.tv_version)
+    TextView tvVersion;
+    @BindView(R.id.btn_version)
+    Button btnVersion;
+    @BindView(R.id.btn_team)
+    Button btnTeam;
+    @BindView(R.id.btn_reply)
+    Button btnReply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +46,20 @@ public class AboutErHuo extends BaseActivity {
             }
         });
 
+    }
+
+    @OnClick(R.id.btn_version)
+    void clickVersion() {
+        startActivity(new Intent(this, ErHuoVersionActivity.class));
+    }
+
+    @OnClick(R.id.btn_team)
+    void clickTeam() {
+        startActivity(new Intent(this, ErHuoTeamActivity.class));
+    }
+
+    @OnClick(R.id.btn_reply)
+    void clickReply() {
+        startActivity(new Intent(this, ErHuoReplyActivity.class));
     }
 }
