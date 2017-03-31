@@ -45,7 +45,8 @@
         <activity android:name=".ui.AboutErHuo" />
         <activity android:name=".ui.ErHuoVersionActivity" />
         <activity android:name=".ui.ErHuoTeamActivity" />
-        <activity android:name=".ui.ErHuoReplyActivity"></activity>
+        <activity android:name=".ui.ErHuoReplyActivity" />
+        <activity android:name=".ui.GoodsDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -24,11 +24,12 @@
     <string name="confirm">确定</string>
     <string name="uploading">正在上传</string>
     <string name="str_goods_create">发布商品</string>
-    <string name="str_goods_description_hint">请输入商品描述...</string>
-    <string name="str_goods_title_hint">请输入商品标题...</string>
-    <string name="str_goods_price_hint">请输入商品价格...</string>
+    <string name="str_goods_description_hint">请输入商品描述&#8230;</string>
+    <string name="str_goods_title_hint">请输入商品标题&#8230;</string>
+    <string name="str_goods_price_hint">请输入商品价格&#8230;</string>
     <string name="str_create">发布</string>
     <string name="str_about_version">版本信息</string>
     <string name="str_about_team">团队介绍</string>
     <string name="str_about_reply">信息反馈</string>
+    <string name="str_goods_detail">商品详情</string>
 </resources>

@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
@@ -29,7 +28,6 @@ import com.htu.erhuo.utils.PreferenceUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Description
@@ -118,8 +116,9 @@ public class MeFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.btn_my_goods)
+    @OnClick({R.id.btn_my_goods, R.id.btn_my_favorite})
     void clickMyGoods() {
+        // TODO: 2017/3/31 我的收藏 
         if (isLogin) {
             Intent intent = new Intent(getContext(), MyGoodsActivity.class);
             Bundle bundle = new Bundle();

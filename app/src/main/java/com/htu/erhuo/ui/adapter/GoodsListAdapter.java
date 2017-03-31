@@ -63,4 +63,9 @@ public class GoodsListAdapter extends BaseQuickAdapter<ItemInfo, BaseViewHolder>
                 break;
         }
     }
+
+    @Override
+    public ItemInfo getItem(int position) {
+        return super.getItem(position);
+    }
 }

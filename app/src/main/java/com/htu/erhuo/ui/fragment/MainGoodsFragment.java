@@ -1,5 +1,6 @@
 package com.htu.erhuo.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.htu.erhuo.R;
 import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.EntityResponse;
@@ -18,6 +20,7 @@ import com.htu.erhuo.entity.ItemInfo;
 import com.htu.erhuo.entity.ItemQueryCondition;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.network.Network;
+import com.htu.erhuo.ui.GoodsDetailActivity;
 import com.htu.erhuo.ui.adapter.GoodsListAdapter;
 
 import java.util.ArrayList;
@@ -33,7 +36,8 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by yzw on 2017/3/30.
  */
 
-public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,
+        BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -77,6 +81,15 @@ public class MainGoodsFragment extends Fragment implements SwipeRefreshLayout.On
         recyclerView.setAdapter(adapter);
         adapter.setOnLoadMoreListener(this, recyclerView);
         adapter.setEnableLoadMore(true);
+        recyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ItemInfo itemInfo = (ItemInfo) adapter.getItem(position);
+                Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
+                intent.putExtra("goodsId", itemInfo.getId().toString());
+                startActivity(intent);
+            }
+        });
         getItemList();
     }
 
