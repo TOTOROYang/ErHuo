@@ -103,8 +103,6 @@ public static java.lang.String TABLENAME;
 -dontwarn okio.**
 -dontwarn org.apache.commons.codec.binary.**
 
--keep class public class * implements com.bumptech.glide.module.GlideModule
+-keep class com.htu.erhuo.utils.EHGlideModule
 
--keep class com.chad.library.adapter.** {
-   *;
-}
+-keep class com.chad.library.adapter.** { *; }
