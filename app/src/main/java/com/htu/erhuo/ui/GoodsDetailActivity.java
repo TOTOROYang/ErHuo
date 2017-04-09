@@ -3,6 +3,7 @@ package com.htu.erhuo.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.htu.erhuo.R;
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.ItemInfo;
+import com.htu.erhuo.entity.UserContact;
 import com.htu.erhuo.network.Network;
 import com.htu.erhuo.ui.adapter.GoodsDetailPictureAdapter;
 
@@ -40,6 +42,8 @@ public class GoodsDetailActivity extends BaseActivity implements AdapterView.OnI
     GridView gvGoodsDetailPhoto;
 
     String goodsId;
+    @BindView(R.id.tv_goods_detail_contact)
+    TextView tvGoodsDetailContact;
     private GoodsDetailPictureAdapter adapter;
     private List<String> picList;
     ItemInfo itemInfo;
@@ -107,12 +111,35 @@ public class GoodsDetailActivity extends BaseActivity implements AdapterView.OnI
     }
 
     private void showGoodsDetail() {
-        tvGoodsDetailTitle.setText(itemInfo.getItemTitle());
-        tvGoodsDetailDes.setText(itemInfo.getItemDesc());
+        tvGoodsDetailTitle.setText(itemInfo.getItemTitle() == null ? "" : itemInfo.getItemTitle());
+        tvGoodsDetailDes.setText(itemInfo.getItemDesc() == null ? "" : itemInfo.getItemDesc());
+        tvGoodsDetailContact.setText(getCreatorContact(itemInfo.getUserContact()));
         tvGoodsDetailPrice.setText(String.format(Locale.CHINESE, "￥%.2f", itemInfo.getPrice()));
         String[] photoListString = itemInfo.getPhotoList().split(",");
         picList.addAll(Arrays.asList(photoListString).subList(1, photoListString.length));
         adapter.notifyDataSetChanged();
+    }
+
+    private String getCreatorContact(UserContact userContact) {
+        if (userContact == null) return "";
+        StringBuilder contact = new StringBuilder();
+        contact.append("\n\n联系方式:\n");
+        if (!TextUtils.isEmpty(userContact.getMobile())) {
+            contact.append("手机号:");
+            contact.append(userContact.getMobile());
+            contact.append("\n");
+        }
+        if (!TextUtils.isEmpty(userContact.getWechat())) {
+            contact.append("微信号:");
+            contact.append(userContact.getWechat());
+            contact.append("\n");
+        }
+        if (!TextUtils.isEmpty(userContact.getQq())) {
+            contact.append("QQ  号:");
+            contact.append(userContact.getQq());
+            contact.append("\n");
+        }
+        return contact.toString();
     }
 
     @Override

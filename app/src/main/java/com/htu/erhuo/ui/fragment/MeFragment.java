@@ -19,6 +19,7 @@ import com.htu.erhuo.application.EHApplication;
 import com.htu.erhuo.entity.UserInfo;
 import com.htu.erhuo.ui.AboutErHuo;
 import com.htu.erhuo.ui.LoginActivity;
+import com.htu.erhuo.ui.MyFavoriteActivity;
 import com.htu.erhuo.ui.MyGoodsActivity;
 import com.htu.erhuo.ui.SetPersonalInfoActivity;
 import com.htu.erhuo.utils.DialogUtil;
@@ -118,9 +119,8 @@ public class MeFragment extends Fragment {
 
     @OnClick({R.id.btn_my_goods, R.id.btn_my_favorite})
     void clickMyGoods() {
-        // TODO: 2017/3/31 我的收藏 
         if (isLogin) {
-            Intent intent = new Intent(getContext(), MyGoodsActivity.class);
+            Intent intent = new Intent(getContext(), MyFavoriteActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString("account", account);
             bundle.putString("name", name);

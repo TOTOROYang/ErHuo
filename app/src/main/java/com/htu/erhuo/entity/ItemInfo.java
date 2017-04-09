@@ -30,6 +30,8 @@ public class ItemInfo {
 
     private BigDecimal quantity;
 
+    private UserContact userContact;
+
     public Long getId() {
         return id;
     }
@@ -132,6 +134,14 @@ public class ItemInfo {
 
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
+    }
+
+    public UserContact getUserContact() {
+        return userContact;
+    }
+
+    public void setUserContact(UserContact userContact) {
+        this.userContact = userContact;
     }
 
     @Override
