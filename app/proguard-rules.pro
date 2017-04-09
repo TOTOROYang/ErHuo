@@ -95,8 +95,9 @@ public static java.lang.String TABLENAME;
 # Gson
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
--keep class org.xz_sale.entity.**{*;}
+-keep class org.xz_sale.entity.**{ *; }
 #这是你定义的实体类
+-keep class com.htu.erhuo.entity.**{ *; }
 
 #阿里oss
 -keep class com.alibaba.sdk.android.oss.** { *; }
@@ -104,5 +105,7 @@ public static java.lang.String TABLENAME;
 -dontwarn org.apache.commons.codec.binary.**
 
 -keep class com.htu.erhuo.utils.EHGlideModule
+
+-keep class com.htu.erhuo.ui.LoginActivity
 
 -keep class com.chad.library.adapter.** { *; }
