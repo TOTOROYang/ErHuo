@@ -107,5 +107,7 @@ public static java.lang.String TABLENAME;
 -keep class com.htu.erhuo.utils.EHGlideModule
 
 -keep class com.htu.erhuo.ui.LoginActivity
+-keepattributes *Annotation*
+-keepattributes *JavascriptInterface*
 
 -keep class com.chad.library.adapter.** { *; }
