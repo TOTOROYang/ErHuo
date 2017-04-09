@@ -143,6 +143,7 @@ public class GoodsCreateActivity extends BaseActivity implements AdapterView.OnI
         BigDecimal bigDecimal = new BigDecimal(etGoodsPrice.getText().toString());
         itemInfo.setPrice(bigDecimal);
         itemInfo.setSortId(ItemSortEnum.idOf(tvChooseSort.getText().toString()));
+        itemInfo.setQuantity(new BigDecimal(1));
         StringBuilder photoListString = new StringBuilder();
         photoListString.append(EHApplication.getInstance().getUserInfo().getPortrait()).append(",");
         for (String s : picList) {

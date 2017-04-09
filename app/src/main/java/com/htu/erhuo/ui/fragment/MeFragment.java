@@ -118,9 +118,13 @@ public class MeFragment extends Fragment {
     }
 
     @OnClick({R.id.btn_my_goods, R.id.btn_my_favorite})
-    void clickMyGoods() {
+    void clickMyGoods(View v) {
         if (isLogin) {
-            Intent intent = new Intent(getContext(), MyFavoriteActivity.class);
+            Intent intent;
+            if (v.getId() == R.id.btn_my_goods)
+                intent = new Intent(getContext(), MyGoodsActivity.class);
+            else
+                intent = new Intent(getContext(), MyFavoriteActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString("account", account);
             bundle.putString("name", name);

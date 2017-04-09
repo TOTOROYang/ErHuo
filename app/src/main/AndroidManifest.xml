@@ -44,11 +44,12 @@
 
         <activity android:name=".ui.GoodsCreateActivity" />
         <activity android:name=".ui.MyGoodsActivity" />
+        <activity android:name=".ui.MyFavoriteActivity" />
         <activity android:name=".ui.AboutErHuo" />
         <activity android:name=".ui.ErHuoVersionActivity" />
         <activity android:name=".ui.ErHuoTeamActivity" />
         <activity android:name=".ui.ErHuoReplyActivity" />
-        <activity android:name=".ui.GoodsDetailActivity"></activity>
+        <activity android:name=".ui.GoodsDetailActivity" />
     </application>
 
 </manifest>
