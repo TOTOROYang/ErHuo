@@ -43,8 +43,8 @@ public class SoftKeyBoardListener {
                     if (onSoftKeyBoardChangeListener != null) {
                         onSoftKeyBoardChangeListener.keyBoardShow(rootViewVisibleHeight - visibleHeight);
                     }
-                    rootViewVisibleHeight = visibleHeight;
-                    return;
+//                    rootViewVisibleHeight = visibleHeight;
+//                    return;
                 }
 
                 //根视图显示高度变大超过200，可以看作软键盘隐藏了
@@ -52,10 +52,10 @@ public class SoftKeyBoardListener {
                     if (onSoftKeyBoardChangeListener != null) {
                         onSoftKeyBoardChangeListener.keyBoardHide(visibleHeight - rootViewVisibleHeight);
                     }
-                    rootViewVisibleHeight = visibleHeight;
-                    return;
+//                    rootViewVisibleHeight = visibleHeight;
+//                    return;
                 }
-
+                rootViewVisibleHeight = visibleHeight;
             }
         });
     }

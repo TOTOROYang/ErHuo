@@ -93,7 +93,7 @@ public class LoginActivity extends BaseActivity {
             public void run() {
                 setKeyBoardListener();
             }
-        }, 300);
+        }, 500);
     }
 
     private void setKeyBoardListener() {

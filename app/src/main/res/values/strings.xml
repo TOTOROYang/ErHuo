@@ -36,5 +36,6 @@
     <string name="str_permission">权限提醒</string>
     <string name="str_permission_tip">居然之前没有给二货这个权限… 还好有挽回机会…现在打开手机自带的系统设置，给hoho授予相应应用权限吧。</string>
     <string name="str_loading">正在加载&#8230;</string>
+    <string name="str_reply_submit">提交反馈</string>
 
 </resources>

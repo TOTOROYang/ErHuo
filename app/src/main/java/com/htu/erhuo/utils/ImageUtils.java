@@ -79,11 +79,13 @@ public class ImageUtils {
 //                }
 //            }
 //        }).start();
-        final String url = EHApplication.getInstance().getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
+        final String url = EHApplication.getInstance().
+                getOss().presignPublicObjectURL(FileUtils.ERHUO_BUCKET, imageName);
         Log.d("yzw", "imageUrl " + url);
         Glide.with(activity)
                 .load(url)
-                .bitmapTransform(new BlurTransformation(EHApplication.getInstance(), Glide.get(EHApplication.getInstance()).getBitmapPool(), 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
+                .bitmapTransform(new BlurTransformation(EHApplication.getInstance(),
+                        Glide.get(EHApplication.getInstance()).getBitmapPool(), 10)) // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
                 .into(imageView);
     }
 

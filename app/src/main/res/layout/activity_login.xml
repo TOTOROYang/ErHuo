@@ -43,6 +43,8 @@
             android:hint="@string/str_login_account_tip"
             android:maxLength="20"
             android:maxLines="1"
+            android:inputType="number"
+            android:imeOptions="actionNext"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="16sp"
@@ -89,6 +91,8 @@
             android:maxLines="1"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
+            android:inputType="textVisiblePassword"
+            android:imeOptions="actionDone"
             android:textSize="16sp"
             android:visibility="visible" />
     </RelativeLayout>
