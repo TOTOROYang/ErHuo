@@ -30,7 +30,7 @@
             android:layout_below="@+id/iv_icon"
             android:layout_alignStart="@+id/iv_icon"
             android:layout_alignEnd="@+id/iv_icon"
-            android:text="V1.0.0"
+            android:text="V1.0.1"
             android:layout_marginTop="11dp"
             android:gravity="center"
             android:textSize="16sp"
@@ -73,6 +73,20 @@
         android:paddingLeft="11dp"
         android:paddingRight="11dp"
         android:text="@string/str_about_reply"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_pay"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/btn_normal_transparent"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:text="@string/str_about_pay"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="16sp" />

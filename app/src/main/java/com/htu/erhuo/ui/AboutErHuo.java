@@ -29,6 +29,8 @@ public class AboutErHuo extends BaseActivity {
     Button btnTeam;
     @BindView(R.id.btn_reply)
     Button btnReply;
+    @BindView(R.id.btn_pay)
+    Button btnPay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,5 +63,10 @@ public class AboutErHuo extends BaseActivity {
     @OnClick(R.id.btn_reply)
     void clickReply() {
         startActivity(new Intent(this, ErHuoReplyActivity.class));
+    }
+
+    @OnClick(R.id.btn_pay)
+    void clickPay(){
+        startActivity(new Intent(this, ErHuoPayActivity.class));
     }
 }

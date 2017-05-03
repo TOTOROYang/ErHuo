@@ -21,6 +21,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         android:background="@color/white"
+        android:maxLength="300"
         android:layout_height="300dp" />
     <Button
         android:id="@+id/btn_reply"

@@ -2,6 +2,7 @@ package com.htu.erhuo.network;
 
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.ErhuoOssToken;
+import com.htu.erhuo.entity.Feedback;
 import com.htu.erhuo.entity.ItemInfo;
 import com.htu.erhuo.entity.ItemQueryCondition;
 import com.htu.erhuo.entity.MovieEntity;
@@ -143,5 +144,9 @@ public class Network {
 
     public Observable<EntityResponse<ItemInfo>> getGoodsDetail(String itemId) {
         return api.getGoodsDetail(itemId).subscribeOn(Schedulers.io());
+    }
+
+    public Observable<EntityResponse> feedBack(Feedback feedback){
+        return api.feedBack(feedback).subscribeOn(Schedulers.io());
     }
 }

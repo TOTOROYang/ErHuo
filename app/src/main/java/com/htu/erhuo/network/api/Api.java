@@ -2,6 +2,7 @@ package com.htu.erhuo.network.api;
 
 import com.htu.erhuo.entity.EntityResponse;
 import com.htu.erhuo.entity.ErhuoOssToken;
+import com.htu.erhuo.entity.Feedback;
 import com.htu.erhuo.entity.ItemInfo;
 import com.htu.erhuo.entity.MovieEntity;
 import com.htu.erhuo.entity.UserInfo;
@@ -62,4 +63,8 @@ public interface Api {
     @GET("item/{itemId}")
     @Headers("token:need")
     Observable<EntityResponse<ItemInfo>> getGoodsDetail(@Path("itemId") String itemId);
+
+    @POST("feedback")
+    @Headers("token:need")
+    Observable<EntityResponse> feedBack(@Body Feedback feedback);
 }

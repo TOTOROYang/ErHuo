@@ -50,6 +50,7 @@
         <activity android:name=".ui.ErHuoTeamActivity" />
         <activity android:name=".ui.ErHuoReplyActivity" />
         <activity android:name=".ui.GoodsDetailActivity" />
+        <activity android:name=".ui.ErHuoPayActivity"></activity>
     </application>
 
 </manifest>

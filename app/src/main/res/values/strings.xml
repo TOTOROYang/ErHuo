@@ -31,11 +31,13 @@
     <string name="str_about_version">版本信息</string>
     <string name="str_about_team">团队介绍</string>
     <string name="str_about_reply">信息反馈</string>
+    <string name="str_about_pay">赞助</string>
     <string name="str_goods_detail">商品详情</string>
     <string name="str_other">其他</string>
     <string name="str_permission">权限提醒</string>
     <string name="str_permission_tip">居然之前没有给二货这个权限… 还好有挽回机会…现在打开手机自带的系统设置，给hoho授予相应应用权限吧。</string>
     <string name="str_loading">正在加载&#8230;</string>
     <string name="str_reply_submit">提交反馈</string>
+    <string name="str_pay_tip">后续版本我们会根据小伙伴们的反馈增加功能\n\n赞助将用于服务器的花费</string>
 
 </resources>
